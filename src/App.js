@@ -20,17 +20,17 @@ const App =()=>{
           <Route exact path="/">
             <HomePage logged={logged} />
           </Route>
-          <Route exact path="/about">
-            <AboutPage />
-          </Route>
-          <Route path="/contact">
-            <ContactPage />
-          </Route>
           <Route exact path="/sign-up">
             <SignUpPage />
           </Route>
           <Route exact path="/log-in">
             <LogInPage />
+          </Route>
+          <Route exact path="/about">
+            <AboutPage />
+          </Route>
+          <Route path="/contact">
+            <ContactPage />
           </Route>
         </Switch>
       </React.Fragment>

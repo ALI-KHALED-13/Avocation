@@ -21,15 +21,15 @@
 }
 
 ::selection {
-  background-color: rgb(127, 229, 255);
+  background-color: rgb(86, 226, 31);
   color: white;
 }
 ::-webkit-scrollbar {width: 0.7vw; height: 0.8vw; }
 ::-webkit-scrollbar-track {background-color: rgb(151, 151, 151); border-radius: 5px;}
-::-webkit-scrollbar-thumb {background-color: rgb(21, 98, 197); border-radius: 50px;} /*rgb(31, 124, 245)*/
+::-webkit-scrollbar-thumb {background-color: rgb(21, 197, 74); border-radius: 50px;} /*rgb(31, 124, 245)*/
 
 body {
-  background-color: rgb(245, 245, 228);
+  background-color: rgb(243, 243, 193);
   overflow-x: hidden;
 }
 /*************************the header styles***************/
@@ -41,8 +41,12 @@ header {
   align-items: center;
   background-color: rgb(217, 255, 127);
   color: rgb(117, 117, 117); 
+  margin-bottom: 1.5%;
 }
-header > h1 {font-size: var(--bigSize);}
+header > h1 {
+  font-size: var(--bigSize);
+  font-weight: bold;
+}
 header  [alt="logo"] {width: max(13vw, 100px); }
 header > p {width: 20%;}
 header > .user {width: 30%; margin-left: auto;}
@@ -70,8 +74,9 @@ header > .user > a {color: rgb(3, 194, 61)}
   position: sticky;
   top: 0;
   z-index: 3;
-  background-color: rgb(190, 241, 194);
+  background-color: rgb(165, 238, 171);
   padding: 1%;
+  user-select: none;
 }
 #home > aside > button {
   background-color: beige;
@@ -79,7 +84,6 @@ header > .user > a {color: rgb(3, 194, 61)}
   border-radius: 5px;
   padding: 1%;
   margin: 1%;
-  user-select: none;
 }
 #home > aside > .selected-categ {
   outline: 'none';
@@ -87,32 +91,93 @@ header > .user > a {color: rgb(3, 194, 61)}
   color: beige;
   
 }
-#home > footer {
+footer {
   grid-area: footer;
   background-color: rgb(36, 36, 36);
   display: flex;
   justify-content: space-around;
 }
-#home > footer > a {
+footer > a {
   color: rgb(234, 247, 225);
   line-height: 50px;
 }
 
-#home > #feed {grid-area: feed; min-height: 85vh;}
+#home > #feed {
+  grid-area: feed; 
+  height: 80vh;
+  overflow-y: auto;
+}
 
 @media screen and (min-width: 700px) {
   #home {
     gap: 10px;
     grid-template-areas: 
-    "footer feed feed categs"
-    " . feed feed ."
-    " . feed feed ."
+    " feed feed feed categs"
+    " feed feed feed footer"
+    " feed feed feed ."
     ;
   }
   #home > aside {top: 10px;}
+  #home > #feed {height:auto; min-height: 85vh;}
   #home > footer {
     position: -webkit-sticky;
     position: sticky;
     top: 10px;
   }
 }
+
+
+/*************************About page and contact*************************/
+.ali{
+  padding: 2%;
+  min-height: 77vh;
+}
+.ali > h1 {font-weight: bold; margin: 2%}
+.ali > p {margin: 1%; padding: 2%;}
+.ali > [alt="author"]{width: 50%;}
+
+
+
+
+/******************log in and sign up page **********************/
+.signing {padding: 2%;}
+
+.signing > form {margin: 4%;}
+.signing table { margin: 4% auto;}
+.signing table tr {height: 7vh;}
+
+.signing td > * {font-weight: bold;}
+.signing td:first-child {text-align: right;}
+.signing td:last-child {
+  font-size: var(--smallSize);
+  padding-left: 6px;
+  text-align: left;
+}
+
+.signing input {
+  padding: 1%;
+  font-weight: normal;
+}
+.signing input:focus {
+  font-weight: bold;
+  outline: none;
+  border: 2px solid rgb(13, 110, 13);
+  background-color: rgb(168, 233, 83);
+  color: rgb(109, 57, 14);
+}
+.signing .pass-feild button {font-size: inherit;}
+
+.signing > form > button {
+  padding: 1%;
+  background-color: rgb(39, 202, 107);
+  border:2px solid rgb(184, 231, 184);
+  border-radius: 10px;
+  color: white;
+}
+
+.gender-feild > label , .hobbies-feild > label {
+  font-weight: normal;
+  margin: 5px;
+}
+
+

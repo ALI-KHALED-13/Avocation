@@ -2,7 +2,6 @@ const Categories =()=>{
     
     const markSelected =(ev)=> {
         if (ev.target.nodeName !== "BUTTON") return;
-        console.log('dfg')
         ev.target.classList.toggle('selected-categ');
     }
     return (
