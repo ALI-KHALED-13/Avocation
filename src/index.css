@@ -1,0 +1,118 @@
+:root {
+  scroll-behavior: smooth;
+  --smallSize: max(1.2vw, 1.2vh);
+  --regularSize: max(2vw, 2vh);
+  --bigSize : max(3.5vw, 3.5vh);
+}
+@font-face {font-family: coolFont;src: url('./media/tikalsansmedium.otf');}
+@font-face {
+  font-family: coolFont-italic;
+  src: url('./media/tikalsansmedium-italic.otf');
+  font-style: italic;
+}
+
+
+* {
+  margin: 0;
+  font-family: coolFont, Verdana, Tahoma, sans-serif;
+  font-size: var(--regularSize);
+  font-weight: 500;
+  text-align: center;
+}
+
+::selection {
+  background-color: rgb(127, 229, 255);
+  color: white;
+}
+::-webkit-scrollbar {width: 0.7vw; height: 0.8vw; }
+::-webkit-scrollbar-track {background-color: rgb(151, 151, 151); border-radius: 5px;}
+::-webkit-scrollbar-thumb {background-color: rgb(21, 98, 197); border-radius: 50px;} /*rgb(31, 124, 245)*/
+
+body {
+  background-color: rgb(245, 245, 228);
+  overflow-x: hidden;
+}
+/*************************the header styles***************/
+header {
+  padding: 2%;
+  max-height: 150px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  background-color: rgb(217, 255, 127);
+  color: rgb(117, 117, 117); 
+}
+header > h1 {font-size: var(--bigSize);}
+header  [alt="logo"] {width: max(13vw, 100px); }
+header > p {width: 20%;}
+header > .user {width: 30%; margin-left: auto;}
+header > .user > a {color: rgb(3, 194, 61)}
+
+
+/**************************Home page styles ******************/
+#home {
+  min-height: 86vh;
+  display:grid;
+  gap: 5px;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: minmax(50px, auto);
+  grid-template-areas: 
+  "categs categs categs categs"
+  "feed  feed feed feed"
+  "feed  feed feed feed"
+  "footer footer footer footer";
+}
+
+
+#home > aside {
+  grid-area: categs;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  background-color: rgb(190, 241, 194);
+  padding: 1%;
+}
+#home > aside > button {
+  background-color: beige;
+  border: solid rgb(36, 206, 87) 2px;
+  border-radius: 5px;
+  padding: 1%;
+  margin: 1%;
+  user-select: none;
+}
+#home > aside > .selected-categ {
+  outline: 'none';
+  background-color: rgb(36, 206, 87);
+  color: beige;
+  
+}
+#home > footer {
+  grid-area: footer;
+  background-color: rgb(36, 36, 36);
+  display: flex;
+  justify-content: space-around;
+}
+#home > footer > a {
+  color: rgb(234, 247, 225);
+  line-height: 50px;
+}
+
+#home > #feed {grid-area: feed; min-height: 85vh;}
+
+@media screen and (min-width: 700px) {
+  #home {
+    gap: 10px;
+    grid-template-areas: 
+    "footer feed feed categs"
+    " . feed feed ."
+    " . feed feed ."
+    ;
+  }
+  #home > aside {top: 10px;}
+  #home > footer {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 10px;
+  }
+}
