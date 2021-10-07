@@ -42,17 +42,4 @@ const LogInPage =()=>{
 
 export default LogInPage
 
-{/*<label>
-        user name: <input />
-    </label>
-
-    <div className="pass-feild">
-        <label>
-            Password:
-        </label>
-        <input type="password"/>
-        <button type="button">
-            {passVisibile? "Hide":"Show"}
-        </button>
-    </div>
-    <button>Log In</button>*/}
+//rm -rf .git
