@@ -1,12 +1,12 @@
 import Categories from './HomeComponents/Categories';
-import PostsArea from './HomeComponents/PostsArea';
+import AvocatasArea from './HomeComponents/AvocatasArea';
 import ContactFooter from './HomeComponents/ContactFooter';
 
 const HomePage =({logged})=>{
     return (
         <main id='home'>
             <Categories /> {/*posts db section*/}
-            <PostsArea logged={logged} />
+            <AvocatasArea logged={logged} />
             <ContactFooter />
         </main>
     );

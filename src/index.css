@@ -29,8 +29,12 @@
 ::-webkit-scrollbar-thumb {background-color: rgb(21, 197, 74); border-radius: 50px;} /*rgb(31, 124, 245)*/
 
 body {
-  background-color: rgb(243, 243, 193);
+  background-color: rgb(243, 243, 180);
   overflow-x: hidden;
+}
+
+@media screen and (min-width: 1100px) {
+  body {width: 75%; margin: 0 auto;}
 }
 /*************************the header styles***************/
 header {
@@ -47,7 +51,7 @@ header > h1 {
   font-size: var(--bigSize);
   font-weight: bold;
 }
-header  [alt="logo"] {width: max(13vw, 100px); }
+header  [alt="logo"] {width: max(10vw, 100px); }
 header > p {width: 20%;}
 header > .user {width: 30%; margin-left: auto;}
 header > .user > a {color: rgb(3, 194, 61)}
@@ -91,21 +95,52 @@ header > .user > a {color: rgb(3, 194, 61)}
   color: beige;
   
 }
+/************/
 footer {
   grid-area: footer;
   background-color: rgb(36, 36, 36);
   display: flex;
   justify-content: space-around;
+  padding: 1%;
 }
 footer > a {
   color: rgb(234, 247, 225);
   line-height: 50px;
 }
-
+/***********/
 #home > #feed {
   grid-area: feed; 
-  height: 80vh;
+  height: 75vh;
   overflow-y: auto;
+}
+.avocata {
+  background-color: rgb(243, 243, 215);
+  margin: 5% auto;
+  width: 99%;
+  box-shadow: rgb(65, 109, 76) 2px 2px 5px;
+}
+/***/
+.avocata > .header {
+  display: flex; 
+  align-content: center;
+  padding: 1%;
+}
+.avocata > .header > img {width: 11%;}
+.avocata > .header > p {
+  font-weight: bold;
+  text-align: left;
+}
+.date-created {
+  font-size: max(1.5vw, 1.5vh);
+  color: #511;
+}
+/***/
+.avocata > .content > p {
+  padding: 2%;
+  text-align: left;
+}
+.avocata > .content > img {
+  width: 100%;
 }
 
 @media screen and (min-width: 700px) {
@@ -117,13 +152,9 @@ footer > a {
     " feed feed feed ."
     ;
   }
+  .avocata {width: 75%;}
   #home > aside {top: 10px;}
   #home > #feed {height:auto; min-height: 85vh;}
-  #home > footer {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 10px;
-  }
 }
 
 

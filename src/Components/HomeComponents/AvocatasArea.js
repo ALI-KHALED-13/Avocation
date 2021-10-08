@@ -1,7 +1,8 @@
 import React from "react";
 import {useEffect } from "react";
+import Avocata from './Avocata';
 
-const PostsArea =({logged})=>{
+const AvocatasArea =({logged})=>{
     useEffect(()=> console.log('posts area mounted'), []);
 
     const posts = [];
@@ -15,8 +16,10 @@ const PostsArea =({logged})=>{
                 </form>
             }
             {posts.map(console.log)}
+            <Avocata />
+            <Avocata />
         </section>
     );
 }
 
-export default React.memo(PostsArea);
+export default React.memo(AvocatasArea);
