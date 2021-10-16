@@ -2,17 +2,17 @@ import { useState } from 'react';
 import {Link} from 'react-router-dom';
 
 const LogInPage =()=>{
-    const [userName, setUserName] = useState('');
+    const [password, setPassword] = useState('');
     const [passVisibile, setPassVisible] = useState(false);
     return (
         <main className="signing">
             <form>
                 <table>
                     <tbody>
-
                     <tr>
-                        <td> <label htmlFor="userName">user name:</label> </td>
-                        <td><input id='userName' name="userName"/></td>
+                        <td> <label htmlFor="userName">User Name:</label> </td>
+                        <td> <input id='userName' name="userName" pattern="^(?=.*[a-z])(?=.*[0-9]).*$" required/></td>
+                        <td> </td>
                     </tr>
 
                     <tr className="pass-feild">
@@ -20,13 +20,16 @@ const LogInPage =()=>{
                             <label htmlFor="password">Password:</label> 
                         </td>
                         <td>
-                            <input type="password" id='password' name="password"/>
+                            <input type={passVisibile? 'text':'password'} name="password" pattern="\w{5,}" 
+                                   id='password' required value={password} onChange={(ev)=> setPassword(ev.target.value)}
+                            />
                         </td>
                         <td>
-                            <button type="button"> {passVisibile? "Hide":"Show"}</button>
+                            <button type="button" onClick={()=> setPassVisible(!passVisibile)}> 
+                                {passVisibile? "Hide":"Show"}
+                            </button>
                         </td>
                     </tr>
-
                     </tbody>
                 </table>
                 <button>Log In</button>

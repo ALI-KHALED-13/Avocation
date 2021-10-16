@@ -200,6 +200,7 @@ footer > a {
   color: rgb(109, 57, 14);
 }
 .signing .pass-feild button {font-size: inherit;}
+.signing .warning {color: red; font-size: inherit;}
 
 .signing > form > button {
   padding: 1%;
@@ -215,6 +216,7 @@ footer > a {
   margin: 5px;
 }
 .gender-feild input {width: auto}
+.signing [alt="avatar"] {width: 30%}
 
 
 
