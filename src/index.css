@@ -172,6 +172,7 @@ footer > a {
 
 /******************log in and sign up page **********************/
 .signing {padding: 2%;}
+.signing button {cursor: pointer;}
 
 .signing > form {margin: 4%;}
 .signing table { margin: 4% auto;}
@@ -179,6 +180,7 @@ footer > a {
 
 .signing td > * {font-weight: bold;}
 .signing td:first-child {text-align: right;}
+.signing td:nth-child(2) {width: 50%;}
 .signing td:last-child {
   font-size: var(--smallSize);
   padding-left: 6px;
@@ -188,6 +190,7 @@ footer > a {
 .signing input {
   padding: 1%;
   font-weight: normal;
+  width: 90%;
 }
 .signing input:focus {
   font-weight: bold;
@@ -206,9 +209,12 @@ footer > a {
   color: white;
 }
 
-.gender-feild > label , .hobbies-feild > label {
+.gender-feild > label {
+  width: 40%;
   font-weight: normal;
   margin: 5px;
 }
+.gender-feild input {width: auto}
+
 
 

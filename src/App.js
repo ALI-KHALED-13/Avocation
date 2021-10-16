@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './index.css';
 import AvocadoHeader from './Components/AvocadoHeader';
@@ -12,6 +12,13 @@ import LogInPage from "./Components/LogInPage";
 
 const App =()=>{
   const [logged, setLogged] = useState(false);
+  
+  useEffect(()=>{
+    fetch('/express_backend')
+    .then(response=> response.json())
+    .then(data=> console.log(data.express))
+  },[])
+
   return (
     <Router>
       <React.Fragment>

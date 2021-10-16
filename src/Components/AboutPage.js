@@ -6,11 +6,12 @@ const AboutPage =()=>{
     return (
         <main className="ali">
             <h1>About US</h1>
-            <p>
+            <pre>
                 avocation is a personal space where you can save, practice and share
-                your hobbies with others fearlessly and with complete freedome. <br />
-                Also, browsing the latest shares to feel inspired everyday !. 
-            </p>
+                your hobbies with others fearlessly and with complete freedome.
+                Also, browsing the latest shares to feel inspired everyday !.
+                Here, Looks and appearances don't make an impact, only talents do.  
+            </pre>
             <br />
             <p>this website was built and is maintaned by <br />
                 <a 
