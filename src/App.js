@@ -1,12 +1,13 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, Suspense, lazy} from 'react';
 import {BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './index.css';
 import AvocadoHeader from './Components/AvocadoHeader';
 import HomePage from './Components/HomePage';
-import AboutPage from './Components/AboutPage';
-import ContactPage from "./Components/ContactPage";
-import SignUpPage from "./Components/SignUpPage";
-import LogInPage from "./Components/LogInPage";
+//lazyLoaded next
+const AboutPage = lazy(()=> import('./Components/AboutPage'));
+const ContactPage = lazy(()=> import('./Components/ContactPage'));
+const LogInPage = lazy(()=> import('./Components/LogInPage'));
+const SignUpPage = lazy(()=> import('./Components/SignUpPage'));
 
 
 
@@ -27,18 +28,20 @@ const App =()=>{
           <Route exact path="/">
             <HomePage logged={logged} />
           </Route>
-          <Route exact path="/sign-up">
-            <SignUpPage />
-          </Route>
-          <Route exact path="/log-in">
-            <LogInPage />
-          </Route>
-          <Route exact path="/about">
-            <AboutPage />
-          </Route>
-          <Route path="/contact">
-            <ContactPage />
-          </Route>
+          <Suspense fallback={<div>Loading....</div>}>
+            <Route exact path="/sign-up">
+              <SignUpPage />
+            </Route>
+            <Route exact path="/log-in">
+              <LogInPage />
+            </Route>
+            <Route exact path="/about">
+              <AboutPage />
+            </Route>
+            <Route path="/contact">
+              <ContactPage />
+            </Route>
+          </Suspense>
         </Switch>
       </React.Fragment>
     </Router>
