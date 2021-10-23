@@ -1,0 +1,106 @@
+/*************************************Home page styles ***********************************/
+#home {
+  min-height: 86vh;
+  display:grid;
+  gap: 5px;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: minmax(50px, auto);
+  grid-template-areas: 
+  "categs categs categs categs"
+  "feed  feed feed feed"
+  "feed  feed feed feed"
+  "footer footer footer footer";
+}
+
+
+#home > aside {
+  grid-area: categs;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  background-color: rgb(165, 238, 171);
+  padding: 1%;
+  user-select: none;
+}
+#home > aside > button {
+  background-color: beige;
+  border: solid rgb(36, 206, 87) 2px;
+  border-radius: 5px;
+  padding: 1%;
+  margin: 1%;
+}
+#home > aside > .selected-categ {
+  outline: 'none';
+  background-color: rgb(36, 206, 87);
+  color: beige;
+  
+}
+/************/
+footer {
+  grid-area: footer;
+  background-color: rgb(36, 36, 36);
+  display: flex;
+  justify-content: space-around;
+  padding: 1%;
+}
+footer > a {
+  color: rgb(234, 247, 225);
+  line-height: 50px;
+}
+/********general feed section styles*******/
+#home > #feed {
+  grid-area: feed; 
+  height: 72vh;
+  overflow-y: auto;
+}
+
+#feed > form, .avocata{
+  background-color: rgb(243, 243, 215);
+  margin: 5% auto;
+  width: 99%;
+  box-shadow: rgb(65, 109, 76) 2px 2px 5px;
+  text-align: left;
+}
+#feed > form > .header, .avocata > .header {
+  display: flex; 
+  align-content: center;
+  padding: 1%;
+}
+.header > img {width: 10%;}
+
+/*****posting form*******/
+#feed > form {padding: 2%;}
+
+
+
+
+/****avocataas posts*****/
+.avocata > .header > p {font-weight: bold;}
+
+.date-created {
+  font-size: max(1.5vw, 1.5vh);
+  color: #511;
+}
+/***/
+.avocata > .content > p {
+  text-align: left;
+  padding: 2%;
+}
+.avocata > .content > img {
+  width: 100%;
+}
+
+@media screen and (min-width: 700px) {
+  #home {
+    gap: 10px;
+    grid-template-areas: 
+    " feed feed feed categs"
+    " feed feed feed footer"
+    " feed feed feed ."
+    ;
+  }
+  .avocata, #feed > form {width: 75%;}
+  #home > aside {top: 10px;}
+  #home > #feed {height:auto; min-height: 85vh;}
+}
