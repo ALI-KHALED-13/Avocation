@@ -1,17 +1,34 @@
 import { useState } from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 
-const LogInPage =()=>{
+const LogInPage =({users, setUser})=>{
+    const [identifier, setIdentifier] = useState('')
     const [password, setPassword] = useState('');
     const [passVisibile, setPassVisible] = useState(false);
+    const [userFound, setUserFound] = useState(true);
+    const history = useHistory();
+
+    const handleLogging =(ev)=>{
+        ev.preventDefault();
+        const userMatched = users.find(user=> user.userName === identifier || user.email === identifier);
+
+        if (!userMatched || userMatched.password !== password) return setUserFound(false)
+
+        setUser(userMatched);
+        history.push('/');
+    }
     return (
         <main className="signing">
-            <form>
+            <form onSubmit={handleLogging}>
+                {userFound || <span className="warning">User name/email or password is not correct or doesn't exist</span>}
                 <table>
                     <tbody>
                     <tr>
-                        <td> <label htmlFor="userName">User Name:</label> </td>
-                        <td> <input id='userName' name="userName" pattern="^(?=.*[a-z])(?=.*[0-9]).*$" required/></td>
+                        <td> <label htmlFor="identifier">User Name:</label> </td>
+                        <td> <input id='identifier' name="identifier"  placeholder="username or email"
+                                    required value={identifier} onChange={(ev)=> setIdentifier(ev.target.value)}
+                            />
+                        </td>
                         <td> </td>
                     </tr>
 
@@ -20,7 +37,7 @@ const LogInPage =()=>{
                             <label htmlFor="password">Password:</label> 
                         </td>
                         <td>
-                            <input type={passVisibile? 'text':'password'} name="password" pattern="\w{5,}" 
+                            <input type={passVisibile? 'text':'password'} name="password" pattern=".{5,}" 
                                    id='password' required value={password} onChange={(ev)=> setPassword(ev.target.value)}
                             />
                         </td>

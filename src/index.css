@@ -192,6 +192,7 @@ footer > a {
   font-weight: normal;
   width: 90%;
 }
+.signing input::placeholder {font-size: var(--smallSize);}
 .signing input:focus {
   font-weight: bold;
   outline: none;
@@ -201,6 +202,7 @@ footer > a {
 }
 .signing .pass-feild button {font-size: inherit;}
 .signing .warning {color: red; font-size: inherit;}
+.signing .warning > * {font-size: inherit;}
 
 .signing > form > button {
   padding: 1%;

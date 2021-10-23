@@ -12,28 +12,34 @@ const SignUpPage = lazy(()=> import('./Components/SignUpPage'));
 
 
 const App =()=>{
-  const [logged, setLogged] = useState(false);
+  const [user, setUser] = useState(false); //indicating a guest
+  const [users, setUsers] = useState([]);
+
+  useEffect(()=> {
+    fetch('/express_backend').then(resp=> resp.json())
+    .then(data=> console.log(data.express)).catch(console.log);
+  }, [])
   
   useEffect(()=>{
-    fetch('/express_backend')
-    .then(response=> response.json())
-    .then(data=> console.log(data.express))
-  },[])
+    fetch('/users').then(resp=> resp.json())
+    .then(users=> setUsers(users))
+    .catch(err=> console.log('error fetching users ', err))
+  },[users.length]) // to be enhanced when enabling the user to upade profile
 
   return (
     <Router>
       <React.Fragment>
-        <AvocadoHeader logged={logged} setLogged={setLogged}/> {/*users db section*/}
+        <AvocadoHeader user={user} setUser={setUser}/> {/*users db section*/}
         <Switch>
           <Route exact path="/">
-            <HomePage logged={logged} />
+            <HomePage user={user} />
           </Route>
           <Suspense fallback={<div>Loading....</div>}>
             <Route exact path="/sign-up">
-              <SignUpPage />
+              <SignUpPage users={users} setUsers={setUsers}/>
             </Route>
             <Route exact path="/log-in">
-              <LogInPage />
+              <LogInPage users={users} setUser={setUser}/>
             </Route>
             <Route exact path="/about">
               <AboutPage />

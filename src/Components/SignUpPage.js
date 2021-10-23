@@ -1,17 +1,22 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useHistory } from "react-router";
+import { Link } from 'react-router-dom';
 import TagInp from './SubComponents/TagInput';
 import favatar from '../media/avatar-f.png';
 import mavatar from '../media/avatar-m.png';
 
-const SignUpPage =()=>{
+const SignUpPage =({users, setUsers})=>{
+    
     const [password, setPassword] = useState('');
     const [passVisibile, setPassVisible] = useState(false);
+    const [gender, setGender] = useState('');
     const [passwordMatches, setPasswordMatches] = useState(true);
     const [savedHobbies, setSavedHobbies] = useState(["LETTERATURE", "SINGING", "DRAWING"]);
     const [addedTags, setAddedTags] = useState([]);
+    const [unameTaken, setUnameTaken] = useState(false);
+    const [emailExists, setEmailExists] = useState(false);
     const history = useHistory();
-    const [gender, setGender] = useState('');
+   
 
     const saveNewHobby =(hobby)=> {
         if (savedHobbies.indexOf(hobby) === -1) setSavedHobbies([...savedHobbies, hobby]);
@@ -23,17 +28,33 @@ const SignUpPage =()=>{
         if (!isMatching) ev.target.value = '';
     }
 
+    const checkExistance =(ev)=>{
+        const type = ev.target.name;
+        const value = ev.target.value;
+        if (type === 'userName'){
+            if (users.some(user=> user.userName === value)) return setUnameTaken(true);
+            setUnameTaken(false);
+        } else {
+            if (users.some(user=> user.email === value)) return setEmailExists(true);
+            setEmailExists(false);
+        }
+    }
+
     const handleNewUser =(ev)=>{
         ev.preventDefault();
+        if (emailExists || unameTaken){
+            return alert('plaease correct your data to remove warnings');
+        }
         const form = new FormData(ev.target);
         form.append('hobbies', addedTags.join(' '));
 
-        fetch('/add-user', {method: "post",body: form,})
+        fetch('/user', {method: "post",body: form,})
         .then((response)=> response.json())
         .then((serverMessage)=> {
             if (serverMessage.message === 'done'){
+                setUsers([...users, serverMessage.message]);
                 history.push('/log-in');
-            } else {console.log('did you sign up before?')}
+            } else {console.log(serverMessage.message)}
         })
         .catch(console.Error)
     }
@@ -52,8 +73,9 @@ const SignUpPage =()=>{
 
                     <tr>
                         <td> <label htmlFor="userName">User Name:</label> </td>
-                        <td> <input id='userName' name="userName" placeholder="letters and numbers" pattern="^(?=.*[a-z])(?=.*[0-9]).*$" required/></td>
-                        <td> needed to log in</td>
+                        <td> <input id='userName' name="userName" placeholder="letters and numbers (no space)" 
+                                    pattern="^(?=.*[a-z])(?=.*[0-9])\w*$" required onBlur={checkExistance}/></td>
+                        <td> {unameTaken? <span className="warning">already taken, try another</span> :'used to log in'}</td>
                     </tr>
 
                     <tr className="pass-feild">
@@ -88,8 +110,12 @@ const SignUpPage =()=>{
 
                     <tr>
                         <td> <label htmlFor="Email">Email:</label> </td>
-                        <td><input type="email" id='Email' name="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required/></td>
-                        <td></td>
+                        <td><input type="email" id='Email' name="email" required
+                                   pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" 
+                                   onBlur={checkExistance} 
+                            />
+                        </td>
+                        <td> {emailExists? <span className="warning">already exists, try <Link to="/log-in">logging in</Link></span> :'used to log in'}</td>
                     </tr>
 
                     <tr>
@@ -124,9 +150,9 @@ const SignUpPage =()=>{
                         <td></td>
                     </tr>
 
-                    <tr><td></td> <td>{gender && <img src={gender === 'male'? mavatar:favatar} alt="avatar"/>}</td> <td></td></tr>
+                    <tr><td></td><td>{gender && <img src={gender === 'male'? mavatar:favatar} alt="avatar"/>}</td><td></td></tr>
 
-                    <tr >
+                    <tr>
                         <td> <label htmlFor="hobby">Hobbies:</label> </td>
                         <td className="hobbies-feild">
                             <TagInp 

@@ -2,7 +2,7 @@ import React from "react";
 import {useEffect } from "react";
 import Avocata from './Avocata';
 
-const AvocatasArea =({logged})=>{
+const AvocatasArea =({user})=>{
     useEffect(()=> console.log('posts area mounted'), []);
 
     const posts = [];
@@ -10,7 +10,7 @@ const AvocatasArea =({logged})=>{
     return (
         <section id="feed">
             {
-                logged &&
+                user &&
                 <form>
                     <input placeholder="title?" />
                 </form>

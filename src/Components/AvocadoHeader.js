@@ -1,7 +1,9 @@
 import {Link} from 'react-router-dom';
 import logo from '../media/avocado_icon.png';
+import favatar from '../media/avatar-f.png';
+import mavatar from '../media/avatar-m.png';
 
-const AvocadoHeader =({logged, setLogged})=>{
+const AvocadoHeader =({user, setUser})=>{
 
     return (
         <header>
@@ -9,12 +11,12 @@ const AvocadoHeader =({logged, setLogged})=>{
             <h1>Avocation|</h1>
             <p>your bright side hobbies</p>
             <div className='user'>
-                {!logged? 
+                {!user? 
                 <Link to="/log-in" >Log In</Link>:
-                <>
-                    <p>user avatar</p>
-                    <Link to="/" onClick={()=> setLogged(false)}>Log Out</Link>
-                </>
+                <div className="userOptions">
+                    <img alt="avatar" src={user.gender === 'male'? mavatar:favatar} width="70"/>
+                    <Link to="/" onClick={()=> setUser(false)}>Log Out</Link>
+                </div>
                 }
             </div>
         </header>
