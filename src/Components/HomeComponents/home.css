@@ -70,9 +70,54 @@ footer > a {
 .header > img {width: 10%;}
 
 /*****posting form*******/
-#feed > form {padding: 2%;}
+#feed > form {
+  padding: 2%;
+  display: flex;
+  flex-flow: row wrap;
+  align-content: center;
+  justify-content: flex-end;
+}
+#feed > form > * {
+  margin: 2%;
+  border-radius: 5px;
+}
+#feed > form > textarea {
+  width: 100%;
+  height: max(10vh, 10vw);
+  overflow-y: auto;
+  word-break:keep-all;
+  resize: none;
+  border:none;
+}
+#feed > form > textarea:focus {outline: 2px solid rgb(36, 206, 87);}
 
+#feed > form > section {width: 100%;} /*the tags area*/
+#feed > form > section > #tagsBag { 
+  min-height: 5vh;
+  width: 100%;
+}
 
+#upload {
+  width: 40%;
+  background-color: rgb(105, 37, 37);
+  padding: 1.6%;
+  color: white;
+  user-select: none;
+  cursor: pointer;
+}
+#upload [type="file"]{display: none;}
+
+#feed > form > .fileData {
+  width: 88%;
+  font-size: max(1.5vw, 1.5vh);
+}
+#feed > form > button {
+  background-color: rgb(33, 150, 33);
+  color: white;
+  border: none;
+  cursor: pointer;
+  width: 20%;
+}
 
 
 /****avocataas posts*****/
