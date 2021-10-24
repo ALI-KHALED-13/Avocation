@@ -3,7 +3,7 @@ import favatar from '../../media/avatar-f.png';
 import React, { useEffect, useRef, useState } from 'react';
 const TagInput = React.lazy(()=> import('../SubComponents/TagInput'));
 
-const AvocataForm =({user})=>{
+const AvocataForm =({user, avocatas, updataAvocatas})=>{
     const [savedTags, setSavedTags] = useState(["DRWAING", "SINGING", "POETRY"]);
     const [addedTags, setAddedTags] = useState([]);
     const [uploaded, setUploaded] = useState(false);
@@ -24,11 +24,12 @@ const AvocataForm =({user})=>{
                 alert('please upload an image or mp3 file only')
                 ev.target.value = null;
                 setUploaded(false);
-
+                setFileName('');
             } else if (file.size/1048576 > 8) {
                 alert('file size it too big, files below 8MB only');
                 ev.target.value = null;
                 setUploaded(false);
+                setFileName('');
             } else {
                 setUploaded(true);
                 setFileName(file.name)
@@ -43,14 +44,23 @@ const AvocataForm =({user})=>{
         form.append('creator', user.userName);
         form.append('tags', addedTags.join(' '));
         form.append('fileName', fileName);
-        form.append('contentType', fileInput.current.files[0].type);
+        form.append('contentType', fileInput.current.files[0]?.type); //note optional chaining
 
         fetch('/avocata', {
             method: "POST",
             body: form,
         })
         .then(resp=> resp.json())
-        .then(message=>  console.log(message.successful?'oh yeah':'oh no') );
+        .then(message=>  {
+            if (message.successful){
+                console.log('oh yeah');
+                updataAvocatas([message.avocata ,...avocatas])
+            }else {
+                console.log(message.error);
+            }
+            
+        })
+        .catch(console.log)
     }
 
     return (
