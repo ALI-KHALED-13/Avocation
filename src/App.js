@@ -29,10 +29,10 @@ const App =()=>{
   return (
     <Router>
       <React.Fragment>
-        <AvocadoHeader user={user} setUser={setUser}/> {/*users db section*/}
+        <AvocadoHeader user={user} setUser={setUser}/> 
         <Switch>
           <Route exact path="/">
-            <HomePage user={user} />
+            {users.length === 0? <main>Loading..</main>:<HomePage user={user} users={users}/>}
           </Route>
           <Suspense fallback={<div>Loading....</div>}>
             <Route exact path="/sign-up">

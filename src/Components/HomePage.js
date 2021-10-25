@@ -3,11 +3,11 @@ import AvocatasArea from './HomeComponents/AvocatasArea';
 import ContactFooter from './HomeComponents/ContactFooter';
 import './HomeComponents/home.css';
 
-const HomePage =({user})=>{
+const HomePage =({user, users})=>{
     return (
         <main id='home'>
             <Categories /> {/*posts db section*/}
-            <AvocatasArea user={user} />
+            <AvocatasArea user={user} users={users}/>
             <ContactFooter />
         </main>
     );

@@ -68,6 +68,11 @@ footer > a {
   padding: 1%;
 }
 .header > img {width: 10%;}
+.header > [alt^="loading"] {
+  width: 30px;
+  height: 30px;
+  margin-left: auto;
+}
 
 /*****posting form*******/
 #feed > form {
@@ -121,14 +126,22 @@ footer > a {
 
 
 /****avocataas posts*****/
+
 .avocata > .header > p {font-weight: bold;}
 
 .date-created {
   font-size: max(1.5vw, 1.5vh);
   color: #511;
 }
+.avocata > .header > button { /*deletion button*/
+  color: rgb(255, 72, 0);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-left: auto;
+}
 /***/
-.avocata > .content > p {
+.avocata > .content > pre {
   text-align: left;
   padding: 2%;
 }

@@ -62,4 +62,3 @@ const LogInPage =({users, setUser})=>{
 
 export default LogInPage
 
-//rm -rf .git

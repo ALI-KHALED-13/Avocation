@@ -92,7 +92,11 @@ header > .user a {color: rgb(3, 194, 61)}
   min-height: 77vh;
 }
 .ali > h1 {font-weight: bold; margin: 2%}
-.ali > p {margin: 1%; padding: 2%;}
+.ali > p {
+  margin: 1%; 
+  padding: 2%;
+  line-height: 3.5vh;
+}
 .ali > [alt="author"]{width: 50%;}
 
 

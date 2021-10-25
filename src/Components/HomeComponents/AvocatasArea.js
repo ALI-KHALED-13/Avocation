@@ -7,12 +7,11 @@ class AvocatasArea extends React.Component {
     constructor(props){
         super(props);
         this.state = {avocatas: [], };
-        this.user = this.props.user
+
         this.updataAvocatas = this.updataAvocatas.bind(this);
     }
 
     componentDidMount(){
-        console.log('posts area mounted');
         fetch('/all-avocatas')
         .then(resp=> resp.json())
         .then(avocatas=> {
@@ -20,21 +19,29 @@ class AvocatasArea extends React.Component {
         })
         .catch(console.log);
     }
-
-    updataAvocatas(arr){this.setState({avocatas: arr})}
+    ///component will unmount with session storage to imrpove rendering time 
+    updataAvocatas(arr){ this.setState({avocatas: arr}) }
 
     render(){
         
         return (
             <section id="feed">
-                {this.user && <AvocataForm user={this.user} avocatas={this.state.avocatas} updataAvocatas={this.updataAvocatas}/>}
+                {this.props.user && <AvocataForm 
+                                        user={this.props.user} avocatas={this.state.avocatas} 
+                                        updataAvocatas={this.updataAvocatas}
+                                    />}
 
-                {this.state.avocatas.map(avocata=> <Avocata data={avocata} key={avocata.createdAt}/>)}
+                {this.state.avocatas.length === 0? <article>Loading fresh avocatas...</article> : 
+                                                    this.state.avocatas.map(avocata=> <Avocata key={avocata.createdAt} data={avocata} 
+                                                            user={this.props.user} users={this.props.users}
+                                                            avocatas={this.state.avocatas} updataAvocatas={this.updataAvocatas}
+                                                    />)
+                }
 
             </section>
         );
     }
 }
 
-export default AvocatasArea;
+export default AvocatasArea; //react.memo the who;e area???
 

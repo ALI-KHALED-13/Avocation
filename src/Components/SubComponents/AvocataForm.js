@@ -1,5 +1,6 @@
 import mavatar from '../../media/avatar-m.png';
 import favatar from '../../media/avatar-f.png';
+import loading from './loading.gif';
 import React, { useEffect, useRef, useState } from 'react';
 const TagInput = React.lazy(()=> import('../SubComponents/TagInput'));
 
@@ -9,6 +10,7 @@ const AvocataForm =({user, avocatas, updataAvocatas})=>{
     const [uploaded, setUploaded] = useState(false);
     const fileInput = useRef(null);
     const [fileName, setFileName] = useState('');
+    const [isPosting, setIsPosting] = useState(false);
 
 
     const saveTag =(tagTxt)=>{
@@ -19,7 +21,7 @@ const AvocataForm =({user, avocatas, updataAvocatas})=>{
         
         fileInput.current.addEventListener('change', (ev)=>{
             let file = ev.target.files[0];
-            if (!file) return setUploaded(false);;
+            if (!file) return setUploaded(false);
             if (!file.type.startsWith('image/') && file.type !== "audio/mpeg"){
                 alert('please upload an image or mp3 file only')
                 ev.target.value = null;
@@ -40,6 +42,7 @@ const AvocataForm =({user, avocatas, updataAvocatas})=>{
 
     const submitAvocata =(ev)=>{
         ev.preventDefault();
+        setIsPosting(true);
         const form = new FormData(ev.target);
         form.append('creator', user.userName);
         form.append('tags', addedTags.join(' '));
@@ -52,10 +55,15 @@ const AvocataForm =({user, avocatas, updataAvocatas})=>{
         })
         .then(resp=> resp.json())
         .then(message=>  {
+            setIsPosting(false);
             if (message.successful){
                 console.log('oh yeah');
-                updataAvocatas([message.avocata ,...avocatas])
+                updataAvocatas([message.avocata, ...avocatas]);
+                ev.target.reset();
+                setAddedTags([]);
+                setUploaded(false);
             }else {
+                alert("couldn't post the avocata "+ message.error);
                 console.log(message.error);
             }
             
@@ -68,6 +76,7 @@ const AvocataForm =({user, avocatas, updataAvocatas})=>{
             <div className="header">
                 <img alt="avatar" src={user.gender === 'male'? mavatar: favatar}/>
                 <p>{user.name}</p>
+                {isPosting && <img alt="loading.." src={loading} />}
             </div>
 
             <textarea placeholder="content/caption" required name="text"/>
