@@ -12,6 +12,7 @@ class AvocatasArea extends React.Component {
     }
 
     componentDidMount(){
+        console.log('fetchig avocatas')
         fetch('/all-avocatas')
         .then(resp=> resp.json())
         .then(avocatas=> {
@@ -32,8 +33,9 @@ class AvocatasArea extends React.Component {
                                     />}
 
                 {this.state.avocatas.length === 0? <article>Loading fresh avocatas...</article> : 
-                                                    this.state.avocatas.map(avocata=>
-                                                         
+                                                    this.state.avocatas //catcha point: [''].some() runs, while [].some() returns false, always
+                                                    .filter(avocata=> this.props.chosenCategs.some(categ=> avocata.tags.indexOf(categ) >= 0)) //''blahblah'.indexOf('') >=0 return true
+                                                    .map(avocata=>    
                                                     <Avocata key={avocata.createdAt} data={avocata} 
                                                             user={this.props.user} users={this.props.users}
                                                             avocatas={this.state.avocatas} updataAvocatas={this.updataAvocatas}
