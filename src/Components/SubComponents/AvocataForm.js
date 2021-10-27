@@ -1,11 +1,12 @@
 import mavatar from '../../media/avatar-m.png';
 import favatar from '../../media/avatar-f.png';
-import loading from './loading.gif';
+import loading from '../../media/loading.gif';
+
 import React, { useEffect, useRef, useState } from 'react';
 const TagInput = React.lazy(()=> import('../SubComponents/TagInput'));
 
 const AvocataForm =({user, avocatas, updataAvocatas})=>{
-    const [savedTags, setSavedTags] = useState(["DRWAING", "SINGING", "POETRY"]);
+    const [savedTags, setSavedTags] = useState([]);
     const [addedTags, setAddedTags] = useState([]);
     const [uploaded, setUploaded] = useState(false);
     const fileInput = useRef(null);
@@ -16,6 +17,15 @@ const AvocataForm =({user, avocatas, updataAvocatas})=>{
     const saveTag =(tagTxt)=>{
         if (savedTags.indexOf(tagTxt) === -1) setSavedTags([...savedTags, tagTxt]);
     }
+    
+    useEffect(()=>{
+        fetch('/tags')
+        .then(resp=> resp.json())
+        .then(tagsArr=>{
+            setSavedTags(tagsArr.map(tagDoc=> tagDoc.tag));
+        })
+        .catch(console.log);
+    }, [])
 
     useEffect(()=>{
         

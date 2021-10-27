@@ -1,11 +1,13 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import mavatar from '../../media/avatar-m.png';
 import favatar from '../../media/avatar-f.png';
+import loading from '../../media/loading.gif';
 
 const Avocata =({data, users, user, avocatas, updataAvocatas})=>{
 
     const author = users.find(user=> user.userName === data.creator);
     const mediaType = data.contentType;
+    const [deleting, setDeleting] = useState(false);
     let fileURL;
 
     // delete the url when the component unmounts (performance thing)
@@ -29,6 +31,8 @@ const Avocata =({data, users, user, avocatas, updataAvocatas})=>{
     
     
     const deleteAvoca =(ev)=>{
+        setDeleting(true);
+
         fetch('avocata', {
             method:"delete",
             headers: {"Content-Type": "application/json"},
@@ -36,11 +40,11 @@ const Avocata =({data, users, user, avocatas, updataAvocatas})=>{
         })
         .then(resp=> resp.json())
         .then(message=> {
+            setDeleting(false);
             if (message.deleted){
                 updataAvocatas(avocatas.filter(avoca=> avoca !== data));
 
                 URL.revokeObjectURL(fileURL); // (performance again)
-                alert('avocata is deleted successfully');  
             }else{
                 alert("couldn't be deleted")
                 console.log(message.error);
@@ -56,11 +60,15 @@ const Avocata =({data, users, user, avocatas, updataAvocatas})=>{
                 <p>{author.name}<br/>
                 <span className="date-created">{data.createdAt.slice(0,10)}</span>
                 </p>
-
+                {deleting && <img alt="loading.." src={loading} />}
                 {user.userName === author.userName &&<button onClick={deleteAvoca}>Delete</button>}
             </div>
             <div className="content">
-                <pre style={{textAlign: data.text.match(/\w/)? 'left':'center'}}>{data.text}</pre>
+                {
+                    data.tags.indexOf('POE') >= 0 || data.tags.indexOf('شعر') >= 0?
+                        <pre style={{textAlign: data.text.match(/\w/)? 'left':'center'}}>{data.text}</pre>
+                        :<p style={{textAlign: data.text.match(/\w/)? 'left':'center'}}>{data.text}</p>
+                }
                 {
                   mediaType !== 'undefined' &&  insertMedia()
                 }

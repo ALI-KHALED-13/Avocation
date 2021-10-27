@@ -4,6 +4,7 @@ import ContactFooter from './HomeComponents/ContactFooter';
 import './HomeComponents/home.css';
 
 const HomePage =({user, users})=>{
+
     return (
         <main id='home'>
             <Categories /> {/*posts db section*/}

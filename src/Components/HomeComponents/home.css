@@ -141,8 +141,7 @@ footer > a {
   margin-left: auto;
 }
 /***/
-.avocata > .content > pre {
-  text-align: left;
+.avocata > .content > pre, .avocata > .content > p {
   padding: 2%;
 }
 .avocata > .content > .media {

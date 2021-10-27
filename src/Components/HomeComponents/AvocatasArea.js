@@ -32,7 +32,9 @@ class AvocatasArea extends React.Component {
                                     />}
 
                 {this.state.avocatas.length === 0? <article>Loading fresh avocatas...</article> : 
-                                                    this.state.avocatas.map(avocata=> <Avocata key={avocata.createdAt} data={avocata} 
+                                                    this.state.avocatas.map(avocata=>
+                                                         
+                                                    <Avocata key={avocata.createdAt} data={avocata} 
                                                             user={this.props.user} users={this.props.users}
                                                             avocatas={this.state.avocatas} updataAvocatas={this.updataAvocatas}
                                                     />)
