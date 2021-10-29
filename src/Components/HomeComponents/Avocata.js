@@ -10,8 +10,8 @@ const Avocata =({data, users, user, avocatas, updataAvocatas})=>{
     const [deleting, setDeleting] = useState(false);
     let fileURL;
 
-    // delete the url when the component unmounts (performance thing)
-    useEffect(()=> ()=> URL.revokeObjectURL(fileURL), [])
+    // delete the media url when the component unmounts (performance thing)
+    useEffect(()=> ()=> URL.revokeObjectURL(fileURL), [fileURL])
 
     const insertMedia =()=>{
         const arrayBuffer = toArrayBuffer(data.fileBuffer.data)
@@ -55,7 +55,10 @@ const Avocata =({data, users, user, avocatas, updataAvocatas})=>{
     return (
         <article className="avocata">
             <div className="header">
+                
                 <img src={author.gender === 'male'? mavatar: favatar} alt="avatar"/>
+                {author.logged && <svg width="18" height="18" > <circle cx="10" cy="10" r="35%" fill="#19d154"/> </svg>}
+                
 
                 <p>{author.name}<br/>
                 <span className="date-created">{data.createdAt.slice(0,10)}</span>

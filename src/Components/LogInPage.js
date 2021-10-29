@@ -12,8 +12,17 @@ const LogInPage =({users, setUser})=>{
         ev.preventDefault();
         const userMatched = users.find(user=> user.userName === identifier || user.email === identifier);
 
-        if (!userMatched || userMatched.password !== password) return setUserFound(false)
+        if (!userMatched || userMatched.password !== password) return setUserFound(false);
+        
+        
+        fetch('/user', {
+            method: 'PUT',
+            headers: {"Content-Type": 'application/json'},
+            body: JSON.stringify(userMatched),
+        })
+        .catch(console.log);
 
+        userMatched.logged = true;
         setUser(userMatched);
         history.push('/');
     }

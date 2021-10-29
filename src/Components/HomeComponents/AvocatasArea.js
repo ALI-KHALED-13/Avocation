@@ -12,7 +12,6 @@ class AvocatasArea extends React.Component {
     }
 
     componentDidMount(){
-        console.log('fetchig avocatas')
         fetch('/all-avocatas')
         .then(resp=> resp.json())
         .then(avocatas=> {

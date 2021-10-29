@@ -6,11 +6,43 @@ import { useState } from 'react';
 
 const AvocadoHeader =({user, setUser})=>{
     const [showOptions, setShowOptions] = useState(false);
+    
     const logOut =()=>{
+        fetch('/user', {
+            method: "PUT",
+            headers: {"Content-Type": 'application/json'},
+            body: JSON.stringify(user),
+        })
+        .catch(console.log);
+
+        user.logged = false;
         setUser(false);
         setShowOptions(false);
     }
 
+    
+
+    const deleteAccount =(ev)=>{
+        setShowOptions(false);
+
+        let password = prompt('Sorry to see you leave T-T \n Enter your password to confirm', '');
+
+        if (password !== user.password) return  alert('password is not correct');
+            
+        fetch('/user', {
+            method: "DELETE",
+            headers: {"Content-type": "application/json"},
+            body: JSON.stringify(user),
+        }).then(resp=> resp.json())
+        .then(message=> {
+            if (message.deleted){
+                setUser(false);
+                alert('your account and avocatas were deleted succesfully');
+            }else {
+                alert("couldn't delete your account, erro:", message.error)
+            }
+        })
+    }
     return (
         <header>
             <Link to="/" ><img alt="logo" src={logo}/></Link>
@@ -30,10 +62,14 @@ const AvocadoHeader =({user, setUser})=>{
                     <div className={(showOptions? 'show ':'') + 'userOptions'}>
                         <h3>@{user.userName}</h3>
                         <Link to="/" onClick={logOut}>Log Out</Link>
+                        <p onClick={deleteAccount} style={{color: 'red', marginTop: '10px', cursor:"pointer"}}>
+                            Delete Account
+                        </p>
                     </div>
                 </div>
                 }
             </div>
+            
         </header>
     );
 }

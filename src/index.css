@@ -61,6 +61,8 @@ header > .user {
 }
 header > .user a {color: rgb(3, 194, 61)}
 
+
+
 /*****if logged in****/
 .userAvatar > [alt="avatar"]{
   width: max(50px, 30%); 

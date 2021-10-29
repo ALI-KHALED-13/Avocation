@@ -67,7 +67,7 @@ footer > a {
   align-content: center;
   padding: 1%;
 }
-.header > img {width: 10%;}
+.header  [alt="avatar"] {width: 10%;}
 .header > [alt^="loading"] {
   width: 30px;
   height: 30px;
@@ -126,6 +126,13 @@ footer > a {
 
 
 /****avocataas posts*****/
+.avocata > .header {position: relative;}
+.header> svg {
+  position: absolute;
+  z-index: 2;
+  left: 7%;
+  top: 68%;
+}
 
 .avocata > .header > p {font-weight: bold;}
 
