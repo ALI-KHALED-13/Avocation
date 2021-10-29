@@ -16,8 +16,8 @@ const AvocadoHeader =({user, setUser})=>{
         .catch(console.log);
 
         user.logged = false;
-        setUser(false);
         setShowOptions(false);
+        setUser(false);
     }
 
     

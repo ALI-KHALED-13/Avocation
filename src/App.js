@@ -24,7 +24,8 @@ const App =()=>{
     fetch('/users').then(resp=> resp.json())
     .then(users=> setUsers(users))
     .catch(err=> console.log('error fetching users ', err))
-  }) // to be enhanced when enabling the user to upade profile // maybe removed? runs on mount and every state change
+    
+  }, [users.length]) // to be enhanced when enabling the user to upade profile // 
 
   return (
     <Router>

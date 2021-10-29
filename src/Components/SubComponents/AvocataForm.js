@@ -67,7 +67,6 @@ const AvocataForm =({user, avocatas, updataAvocatas})=>{
         .then(message=>  {
             setIsPosting(false);
             if (message.successful){
-                console.log('oh yeah');
                 updataAvocatas([message.avocata, ...avocatas]);
                 ev.target.reset();
                 setAddedTags([]);
