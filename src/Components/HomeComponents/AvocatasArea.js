@@ -34,11 +34,11 @@ class AvocatasArea extends React.Component {
     }
     
     
-    componentDidUpdate(prevProps, prevState){
+    componentDidUpdate(){
 
         const observer = new IntersectionObserver((entries, observer)=>{
 
-            if (entries[0].target.childElementCount !== 2) return // it's the loading...
+            if (entries[0].target.querySelector("#mother") !== null) return // it's my mother avoca... wait till the last avoca gets updated
             if (entries[0].isIntersecting){
                 feedSection.lastElementChild.style.visibility = "visible"; //loading text
 
@@ -52,7 +52,8 @@ class AvocatasArea extends React.Component {
                 })
                 .then(resp=> resp.json())
                 .then(avocatas=> {
-                    if (avocatas.length > 0){
+                    if (avocatas.length > 0 && // if something was returned
+                        avocatas[0]._id !== this.state.avocatas[this.state.avocatas.length - 1]._id){ //avoid repetition
                         this.updataAvocatas(this.state.avocatas.concat(avocatas));
                     }
                     feedSection.lastElementChild.style.visibility = "hidden";
@@ -67,7 +68,7 @@ class AvocatasArea extends React.Component {
 
         let feedSection = document.getElementById('feed');
         let lastAvoca = feedSection.children[feedSection.children.length - 2]; //-1 is the loading
-        observer.observe(lastAvoca? lastAvoca: feedSection.lastElementChild)
+        observer.observe(lastAvoca);
     }
 
     componentWillUnmount(){
@@ -88,6 +89,16 @@ class AvocatasArea extends React.Component {
                                         updataAvocatas={this.updataAvocatas}
                                     />}
 
+                <Avocata user={false} users={this.props.users} data={{
+                    text: "for my beloved Mother, who used to love drinking avocado :)",
+                    creator: "Azza",
+                    tags: "THANKS",
+                    filename: "أمي.jpg",
+                    contentType: "image/jpeg",
+                    createdAt: "Forever",
+
+                }} />
+
                 {this.state.avocatas.length > 0 && this.state.avocatas
                                                     .map(avocata=>{
                                                         if (this.props.chosenCategs.some(categ=> avocata.tags.indexOf(categ) === -1)){ //catcha point: [''].some() runs, while [].some() returns false, always
@@ -99,7 +110,7 @@ class AvocatasArea extends React.Component {
                                                                 />
                                                     })
                 }
-                 <article>Loading fresh avocatas...</article> 
+                 <article style={{margin: "20px"}}>Loading fresh avocatas...</article> 
 
             </section>
         );

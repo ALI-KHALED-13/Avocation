@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import mavatar from '../../media/avatar-m.png';
 import favatar from '../../media/avatar-f.png';
 import loading from '../../media/loading.gif';
+import mother from '../../media/أمي.jpg';
 
 const Avocata =({data, users, user, avocatas, updataAvocatas})=>{
 
@@ -14,12 +15,15 @@ const Avocata =({data, users, user, avocatas, updataAvocatas})=>{
     useEffect(()=> ()=> URL.revokeObjectURL(fileURL), [fileURL])
 
     const insertMedia =()=>{
+        if (data.creator === "Azza"){
+            return <img alt="the most beautiful woman" src={mother} className="media" id="mother"/>
+        }
         const arrayBuffer = toArrayBuffer(data.fileBuffer.data)
         const file = new File([arrayBuffer], data.fileName, {type: mediaType});
         fileURL = URL.createObjectURL(file);
 
         if (mediaType.startsWith('image/')){
-            return <img alt="data.fileName" src={fileURL} className="media"/>
+            return <img alt={data.fileName} src={fileURL} className="media"/>
         }else {
             return (
                 <audio controls className="media">
@@ -64,7 +68,7 @@ const Avocata =({data, users, user, avocatas, updataAvocatas})=>{
                 <span className="date-created">{data.createdAt.slice(0,10)}</span>
                 </p>
                 {deleting && <img alt="loading.." src={loading} />}
-                {user.userName === author.userName &&<button onClick={deleteAvoca}>Delete</button>}
+                {user?.userName === author.userName &&<button onClick={deleteAvoca}>Delete</button>}
             </div>
             <div className="content">
                 {
