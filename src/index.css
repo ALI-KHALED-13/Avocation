@@ -72,7 +72,7 @@ header > .user a {color: rgb(3, 194, 61)}
 .userOptions {
   position: absolute;
   top: 100%;
-  left: 20%;
+  left: 3%;
   z-index: 5;
   font-size: max(1.5vw, 1.5vh);
   padding: 5%;

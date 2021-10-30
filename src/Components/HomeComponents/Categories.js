@@ -8,7 +8,7 @@ const Categories =({setChosenCategs})=>{
         .then(resp=> resp.json())
         .then(tagsArr=>{
             const availCateg = tagsArr.filter(tagOb=> tagOb.count > 0).sort((ob1, ob2)=> ob2.count - ob1.count );
-            setCategrories(availCateg.slice(0, 4));
+            setCategrories(availCateg.slice(0, 5));
         })
         .catch(console.log);
     }, [])

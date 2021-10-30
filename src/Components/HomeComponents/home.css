@@ -22,6 +22,8 @@
   background-color: rgb(165, 238, 171);
   padding: 1%;
   user-select: none;
+  display: flex;
+  overflow-x: auto;
 }
 #home > aside > button {
   background-color: beige;
@@ -165,6 +167,6 @@ footer > a {
     ;
   }
   .avocata, #feed > form {width: 75%;}
-  #home > aside {top: 10px;}
+  #home > aside {top: 10px; flex-flow: row wrap;}
   #home > #feed {height:auto; min-height: 85vh;}
 }
