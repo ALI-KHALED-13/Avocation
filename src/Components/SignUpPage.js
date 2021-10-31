@@ -52,7 +52,7 @@ const SignUpPage =({users, setUsers})=>{
         .then((response)=> response.json())
         .then((serverMessage)=> {
             if (serverMessage.message === 'done'){
-                setUsers([...users, serverMessage.message]);
+                setUsers([...users, serverMessage.result]);
                 history.push('/log-in');
             } else {console.log(serverMessage.message)}
         })

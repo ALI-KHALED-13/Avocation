@@ -13,11 +13,16 @@ const AvocadoHeader =({user, setUser})=>{
             headers: {"Content-Type": 'application/json'},
             body: JSON.stringify(user),
         })
+        .then(()=>{
+            localStorage.removeItem('user');
+            localStorage.removeItem('expiryDate'); 
+
+            setShowOptions(false);
+            setUser(false);
+        })
         .catch(console.log);
 
-        user.logged = false;
-        setShowOptions(false);
-        setUser(false);
+        
     }
 
     
@@ -36,6 +41,8 @@ const AvocadoHeader =({user, setUser})=>{
         }).then(resp=> resp.json())
         .then(message=> {
             if (message.deleted){
+                localStorage.removeItem('user');
+                localStorage.removeItem('expiryDate'); 
                 setUser(false);
                 alert('your account and avocatas were deleted succesfully');
             }else {

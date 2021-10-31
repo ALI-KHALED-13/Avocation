@@ -32,12 +32,13 @@
   padding: 1%;
   margin: 1%;
 }
+
 #home > aside > .selected-categ {
   outline: 'none';
   background-color: rgb(36, 206, 87);
   color: beige;
-  
 }
+
 /************/
 footer {
   grid-area: footer;

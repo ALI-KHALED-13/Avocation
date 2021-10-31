@@ -62,7 +62,7 @@ const Avocata =({data, user, users ,avocatas, updataAvocatas})=>{
             <div className="header">
                 
                 <img src={author.gender === 'male'? mavatar: favatar} alt="avatar"/>
-                {author.logged && <svg width="18" height="18" > <circle cx="10" cy="10" r="35%" fill="#19d154"/> </svg>}
+                {user && author.logged && <svg width="18" height="18" > <circle cx="10" cy="10" r="35%" fill="#19d154"/> </svg>}
                 
 
                 <p>{author.name}<br/>

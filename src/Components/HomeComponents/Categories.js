@@ -15,6 +15,7 @@ const Categories =({setChosenCategs, user})=>{
 
     const markSelected =(ev)=> {
         if (ev.target.nodeName !== "BUTTON") return;
+  
         ev.target.classList.toggle('selected-categ');
 
         const chosen = Array.from(ev.target.parentElement.getElementsByClassName('selected-categ')).map(button=>{
@@ -24,7 +25,7 @@ const Categories =({setChosenCategs, user})=>{
     }
     return (
         <aside onClick={markSelected}>
-            {user && <button>mine</button>}
+            {user && <button style={{border: "solid rgb(124, 69, 32) 2px"}}>mine</button>}
             {
             categories.map(categ=> <button key={categ.tag}>{categ.tag}</button>)
             }

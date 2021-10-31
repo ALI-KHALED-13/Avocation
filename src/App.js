@@ -12,7 +12,12 @@ const SignUpPage = lazy(()=> import('./Components/SignUpPage'));
 
 
 const App =()=>{
-  const [user, setUser] = useState(false); //indicating a guest
+  const prevUser = JSON.parse(localStorage.getItem('user')); // null if he isn't (JSON.parse(null) === null)
+  let stillSaved;
+  if (prevUser){
+    stillSaved = new Date(localStorage.getItem('expiryDate')) > new Date() ;
+  }
+  const [user, setUser] = useState(stillSaved? prevUser: false ); //indicating a guest if false
   const [users, setUsers] = useState([]);
 
   useEffect(()=> {
@@ -22,11 +27,12 @@ const App =()=>{
   
   useEffect(()=>{
     
-    fetch('/users').then(resp=> resp.json())
+    fetch('/users')
+    .then(resp=> resp.json())
     .then(fetchedUsers=> {
-      if (fetchedUsers.length > users.length){
-        setUsers(fetchedUsers);
-      }
+
+      if (fetchedUsers.length > users.length) setUsers(fetchedUsers);
+
     })
     .catch(err=> console.log('error fetching users ', err))
     

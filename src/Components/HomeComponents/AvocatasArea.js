@@ -12,6 +12,7 @@ class AvocatasArea extends React.Component {
         };
         this.controller = new AbortController();
         this.updataAvocatas = this.updataAvocatas.bind(this);
+        this.handleObserver = this.handleObserver.bind(this);
     }
 
     componentDidMount(){
@@ -49,41 +50,25 @@ class AvocatasArea extends React.Component {
     
     
     componentDidUpdate(prevProps, prevState){
-        if (prevState.users.length === 0) return ; // it an update for users, avocatas are yet fetching
+        if (prevState.users.length === 0) return ; // it the first update for users, avocatas are yet fetching
 
-        const observer = new IntersectionObserver((entries, observer)=>{
-
-            if (entries[0].target.querySelector("#mother") !== null) return // it's my mother avoca... wait till the last avoca gets updated
-            if (entries[0].isIntersecting){
-                feedSection.lastElementChild.style.visibility = "visible"; //loading text
-
-                fetch('/all-avocatas', {
-                    method: "PUT",
-                    headers: {"Content-Type": "application/json"},
-                    body: JSON.stringify({
-                        createdBefore: this.state.avocatas[this.state.avocatas.length - 1].createdAt
-                    }),
-                    signal: this.controller.signall,
-                })
-                .then(resp=> resp.json())
-                .then(avocatas=> {
-                    if (avocatas.length > 0 && // if something was returned
-                        avocatas[0]._id !== this.state.avocatas[this.state.avocatas.length - 1]._id){ //avoid repetition
-                        this.updataAvocatas(this.state.avocatas.concat(avocatas));
-                    }
-                    feedSection.lastElementChild.style.visibility = "hidden";
-                    observer.unobserve(lastAvoca); 
-                })
-                .catch(err=>{
-                    if (err.name === "AbortError") return;
-                    console.log(err)
-                });
-            }
-        }, {threeshold: 0.1});
+        const observer = new IntersectionObserver(this.handleObserver, {threeshold: 0.1});
 
         let feedSection = document.getElementById('feed');
-        let lastAvoca = feedSection.children[feedSection.children.length - 2]; //-1 is the loading
+        let lastAvoca = feedSection.children[feedSection.children.length - 2]; //-1 is the loading..
         observer.observe(lastAvoca);
+
+        /////////////////////update users status ////////
+        fetch('/users', {signal: this.controller.signal})
+        .then(resp=> resp.json())
+        .then(fetchedUsers=>{
+
+            let condition = fetchedUsers.length > this.state.users.length || 
+                            fetchedUsers.some((user, ind)=> user.logged !== this.state.users[ind].logged);
+
+            if (condition) this.setState({users: fetchedUsers})
+        })
+        .catch(console.log)
     }
 
     componentWillUnmount(){
@@ -95,6 +80,40 @@ class AvocatasArea extends React.Component {
         document.getElementById('feed').lastElementChild.style.visibility = "hidden";
     }
 
+    handleObserver(entries, observer){
+        let feedSection = document.getElementById('feed');
+        if (entries[0].target.querySelector("#mother") !== null) return; // it's my mother avoca (not logged IN)... wait till the last avoca gets inserted
+
+        if (entries[0].target.nodeName === "FORM") return; // it's the AvocataForm (logged IN)... wait till the last avoca gets inserted
+        
+        if (entries[0].isIntersecting){
+            feedSection.lastElementChild.style.visibility = "visible"; //loading text
+
+            fetch('/all-avocatas', {
+                method: "PUT",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({
+                    createdBefore: this.state.avocatas[this.state.avocatas.length - 1].createdAt
+                }),
+                signal: this.controller.signal,
+            })
+            .then(resp=> resp.json())
+            .then(avocatas=> {
+                if (avocatas.length > 0 && // if something was returned
+                    avocatas[0]._id !== this.state.avocatas[this.state.avocatas.length - 1]._id){ //avoid repetition
+
+                    this.updataAvocatas(this.state.avocatas.concat(avocatas));
+                }
+                feedSection.lastElementChild.style.visibility = "hidden";
+                observer.unobserve(entries[0].target); 
+            })
+            .catch(err=>{
+                if (err.name === "AbortError") return;
+                console.log(err)
+            });
+        }
+    }
+
     render(){
         
         return !this.state.users.length? <section>loading...</section>: 
@@ -103,7 +122,7 @@ class AvocatasArea extends React.Component {
                 
                 <Avocata user={false} users={this.state.users}
                     data={{
-                        text: "for my beloved Mother, who used to love avocado juice:)",
+                        text: "for my beloved Mother, who used to love avocado juice :)",
                         creator: "Azza",
                         tags: "THANKS",
                         filename: "أمي.jpg",
@@ -113,11 +132,11 @@ class AvocatasArea extends React.Component {
                     }} 
                 />
 
-                    {this.props.user && <AvocataForm 
-                                        user={this.props.user} avocatas={this.state.avocatas} 
-                                        updataAvocatas={this.updataAvocatas}
-                                    />
-                    }
+                {this.props.user && <AvocataForm 
+                                    user={this.props.user} avocatas={this.state.avocatas} 
+                                    updataAvocatas={this.updataAvocatas}
+                                />
+                }
 
                 {this.state.avocatas.length > 0 && this.state.avocatas
                                                     .map(avocata=>{

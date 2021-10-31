@@ -5,6 +5,7 @@ const LogInPage =({users, setUser})=>{
     const [identifier, setIdentifier] = useState('')
     const [password, setPassword] = useState('');
     const [passVisibile, setPassVisible] = useState(false);
+    const [toBeRememebered, setToBeRememebered] = useState(false);
     const [userFound, setUserFound] = useState(true);
     const history = useHistory();
 
@@ -20,11 +21,23 @@ const LogInPage =({users, setUser})=>{
             headers: {"Content-Type": 'application/json'},
             body: JSON.stringify(userMatched),
         })
+        .then(()=>{
+            userMatched.logged = true;
+            setUser(userMatched);
+
+            localStorage.setItem('user', JSON.stringify(userMatched));
+            if (toBeRememebered){
+                localStorage.setItem('expiryDate', new Date(Date.now() + 60000 * 60 * 48 ).toISOString()); //remembered for two days
+            }else {
+                localStorage.setItem('expiryDate', new Date(Date.now() + 60000 * 120 ).toISOString()); //2 hours after logging in
+            }
+
+            
+            history.push('/');
+        })
         .catch(console.log);
 
-        userMatched.logged = true;
-        setUser(userMatched);
-        history.push('/');
+        
     }
     return (
         <main className="signing">
@@ -58,6 +71,12 @@ const LogInPage =({users, setUser})=>{
                     </tr>
                     </tbody>
                 </table>
+
+                <label style={{fontSize: '17px'}}>
+                    <input style={{width: 'auto'}} type="checkbox" checked={toBeRememebered} onChange={()=> setToBeRememebered(!toBeRememebered)}/> Remmeber Me
+                </label>
+                <br />
+                <br />
                 <button>Log In</button>
             </form>
 

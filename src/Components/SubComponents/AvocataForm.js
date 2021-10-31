@@ -59,7 +59,7 @@ const AvocataForm =({user, avocatas, updataAvocatas})=>{
         const uploadedFile = form.get('media');
 
         if (uploadedFile && uploadedFile.type.includes('image')){ //compress images
-            const options = {maxSizeMB: 1,   maxWidthOrHeight: 600};
+            const options = {maxSizeMB: 1,   maxWidthOrHeight: 620};
             const compressedFile = await imageCompression(uploadedFile, options);
             form.set('media', compressedFile)
         }
