@@ -1,6 +1,7 @@
 import mavatar from '../../media/avatar-m.png';
 import favatar from '../../media/avatar-f.png';
 import loading from '../../media/loading.gif';
+import imageCompression from 'browser-image-compression';
 
 import React, { useEffect, useRef, useState } from 'react';
 const TagInput = React.lazy(()=> import('../SubComponents/TagInput'));
@@ -50,10 +51,19 @@ const AvocataForm =({user, avocatas, updataAvocatas})=>{
         
     }, [])
 
-    const submitAvocata =(ev)=>{
+    const submitAvocata =async (ev)=>{
         ev.preventDefault();
         setIsPosting(true);
         const form = new FormData(ev.target);
+
+        const uploadedFile = form.get('media');
+
+        if (uploadedFile && uploadedFile.type.includes('image')){ //compress images
+            const options = {maxSizeMB: 1,   maxWidthOrHeight: 600};
+            const compressedFile = await imageCompression(uploadedFile, options);
+            form.set('media', compressedFile)
+        }
+
         form.append('creator', user.userName);
         form.append('tags', addedTags.join(' '));
         form.append('fileName', fileName);

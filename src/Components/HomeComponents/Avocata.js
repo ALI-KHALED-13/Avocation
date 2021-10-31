@@ -4,7 +4,7 @@ import favatar from '../../media/avatar-f.png';
 import loading from '../../media/loading.gif';
 import mother from '../../media/أمي.jpg';
 
-const Avocata =({data, users, user, avocatas, updataAvocatas})=>{
+const Avocata =({data, user, users ,avocatas, updataAvocatas})=>{
 
     const author = users.find(user=> user.userName === data.creator);
     const mediaType = data.contentType;
@@ -13,6 +13,7 @@ const Avocata =({data, users, user, avocatas, updataAvocatas})=>{
 
     // delete the media url when the component unmounts (performance thing)
     useEffect(()=> ()=> URL.revokeObjectURL(fileURL), [fileURL])
+
 
     const insertMedia =()=>{
         if (data.creator === "Azza"){
@@ -56,7 +57,7 @@ const Avocata =({data, users, user, avocatas, updataAvocatas})=>{
         }).catch(console.log)
     }
 
-    return (
+    return  (
         <article className="avocata">
             <div className="header">
                 

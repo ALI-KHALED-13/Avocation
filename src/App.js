@@ -21,11 +21,16 @@ const App =()=>{
   }, [])
   
   useEffect(()=>{
+    
     fetch('/users').then(resp=> resp.json())
-    .then(users=> setUsers(users))
+    .then(fetchedUsers=> {
+      if (fetchedUsers.length > users.length){
+        setUsers(fetchedUsers);
+      }
+    })
     .catch(err=> console.log('error fetching users ', err))
     
-  }, [users.length]) // to be enhanced when enabling the user to upade profile // 
+  })  
 
   return (
     <Router>
@@ -33,7 +38,7 @@ const App =()=>{
         <AvocadoHeader user={user} setUser={setUser}/> 
         <Switch>
           <Route exact path="/">
-            {users.length === 0? <main>Loading..</main>:<HomePage user={user} users={users}/>}
+            <HomePage user={user} />
           </Route>
           <Suspense fallback={<div>Loading....</div>}>
             <Route exact path="/sign-up">

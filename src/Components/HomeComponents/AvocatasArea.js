@@ -8,33 +8,48 @@ class AvocatasArea extends React.Component {
         super(props);
         this.state = {
             avocatas: [],
+            users: [],
         };
         this.controller = new AbortController();
         this.updataAvocatas = this.updataAvocatas.bind(this);
     }
 
     componentDidMount(){
-        fetch('/all-avocatas', {
-            method: "PUT",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({createdBefore: Date.now()}),
-            signal: this.controller.signal,
-        })
+        fetch('/users', {signal: this.controller.signal})
         .then(resp=> resp.json())
-        .then(avocatas=> {
-            if (avocatas[0]._id === this.state.avocatas[0]?._id){// no new stuff
-                return;
-            }
-            this.updataAvocatas(avocatas);   
+        .then(fetchedUsers=> {
+            this.setState({users: fetchedUsers});
+
+            fetch('/all-avocatas', {
+                method: "PUT",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({createdBefore: Date.now()}),
+                signal: this.controller.signal,
+            })
+            .then(resp=> resp.json())
+            .then(avocatas=> {
+                if (avocatas[0]._id === this.state.avocatas[0]?._id){// no new stuff
+                    return;
+                }
+                this.updataAvocatas(avocatas);   
+            })
+            .catch(err=>{
+                if (err.name === "AbortError") return;
+                console.log(err)
+            });
+
         })
         .catch(err=>{
             if (err.name === "AbortError") return;
             console.log(err)
         });
+
+        
     }
     
     
-    componentDidUpdate(){
+    componentDidUpdate(prevProps, prevState){
+        if (prevState.users.length === 0) return ; // it an update for users, avocatas are yet fetching
 
         const observer = new IntersectionObserver((entries, observer)=>{
 
@@ -82,30 +97,41 @@ class AvocatasArea extends React.Component {
 
     render(){
         
-        return (
+        return !this.state.users.length? <section>loading...</section>: 
+          (
             <section id="feed">
-                {this.props.user && <AvocataForm 
+                
+                <Avocata user={false} users={this.state.users}
+                    data={{
+                        text: "for my beloved Mother, who used to love avocado juice:)",
+                        creator: "Azza",
+                        tags: "THANKS",
+                        filename: "أمي.jpg",
+                        contentType: "image/jpeg",
+                        createdAt: "Forever",
+
+                    }} 
+                />
+
+                    {this.props.user && <AvocataForm 
                                         user={this.props.user} avocatas={this.state.avocatas} 
                                         updataAvocatas={this.updataAvocatas}
-                                    />}
-
-                <Avocata user={false} users={this.props.users} data={{
-                    text: "for my beloved Mother, who used to love drinking avocado :)",
-                    creator: "Azza",
-                    tags: "THANKS",
-                    filename: "أمي.jpg",
-                    contentType: "image/jpeg",
-                    createdAt: "Forever",
-
-                }} />
+                                    />
+                    }
 
                 {this.state.avocatas.length > 0 && this.state.avocatas
                                                     .map(avocata=>{
-                                                        if (this.props.chosenCategs.some(categ=> avocata.tags.indexOf(categ) === -1)){ //catcha point: [''].some() runs, while [].some() returns false, always
+                                                        let chosenTags = this.props.chosenCategs;
+                                                        if (chosenTags.includes('mine')){
+                                                            if (avocata.creator !== this.props.user.userName) return null
+                                                            chosenTags = this.props.chosenCategs.filter(tag=> tag !== 'mine');
+                                                        }
+                                                       
+                                                        if (chosenTags.some(categ=> avocata.tags.indexOf(categ) === -1)){ //catcha point: [''].some() runs, while [].some() returns false, always
                                                             return null; //'blahblah'.indexOf('') === -1 returns false cause '' exists XD
                                                         }
                                                         return <Avocata key={avocata.createdAt} data={avocata} 
-                                                                user={this.props.user} users={this.props.users}
+                                                                user={this.props.user} users={this.state.users}
                                                                 avocatas={this.state.avocatas} updataAvocatas={this.updataAvocatas}
                                                                 />
                                                     })

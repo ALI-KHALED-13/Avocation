@@ -71,14 +71,14 @@ header > .user a {color: rgb(3, 194, 61)}
 
 .userOptions {
   position: absolute;
-  top: 100%;
+  top: 95%;
   left: 3%;
   z-index: 5;
   font-size: max(1.5vw, 1.5vh);
   padding: 5%;
   background-color: rgb(233, 255, 212);
   border-radius: 5px;
-  transform: scale(0.05) translate(200px, -300px);
+  transform: scale(0.01) translate(200px, -300px);
 
   transition: all 0.5s;
 }

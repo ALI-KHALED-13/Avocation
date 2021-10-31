@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const Categories =({setChosenCategs})=>{
+const Categories =({setChosenCategs, user})=>{
     const [categories, setCategrories] = useState([]);
 
     useEffect(()=>{
@@ -24,6 +24,7 @@ const Categories =({setChosenCategs})=>{
     }
     return (
         <aside onClick={markSelected}>
+            {user && <button>mine</button>}
             {
             categories.map(categ=> <button key={categ.tag}>{categ.tag}</button>)
             }
