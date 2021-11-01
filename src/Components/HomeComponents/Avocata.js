@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import mavatar from '../../media/avatar-m.png';
-import favatar from '../../media/avatar-f.png';
-import loading from '../../media/loading.gif';
-import mother from '../../media/أمي.jpg';
+import mavatar from '../media/avatar-m.png';
+import favatar from '../media/avatar-f.png';
+import loading from '../media/loading.gif';
+import mother from '../media/أمي.jpg';
 
 const Avocata =({data, user, users ,avocatas, updataAvocatas})=>{
 

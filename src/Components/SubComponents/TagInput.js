@@ -1,5 +1,5 @@
 import { useState } from "react"
-import removeSign from '../../media/xsign.png';
+import removeSign from '../media/xsign.png';
 import './TagInput.css';
 
 const TagInput =({savedTags, saveTag, addedTags, setAddedTags})=>{

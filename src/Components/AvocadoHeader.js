@@ -1,7 +1,7 @@
 import {Link} from 'react-router-dom';
-import logo from '../media/avocado_icon.png';
-import favatar from '../media/avatar-f.png';
-import mavatar from '../media/avatar-m.png';
+import logo from './media/avocado_icon.png';
+import favatar from './media/avatar-f.png';
+import mavatar from './media/avatar-m.png';
 import { useState } from 'react';
 
 const AvocadoHeader =({user, setUser})=>{

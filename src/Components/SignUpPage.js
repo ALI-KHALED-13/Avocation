@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useHistory } from "react-router";
 import { Link } from 'react-router-dom';
 import TagInp from './SubComponents/TagInput';
-import favatar from '../media/avatar-f.png';
-import mavatar from '../media/avatar-m.png';
+import favatar from './media/avatar-f.png';
+import mavatar from './media/avatar-m.png';
 
 const SignUpPage =({users, setUsers})=>{
     

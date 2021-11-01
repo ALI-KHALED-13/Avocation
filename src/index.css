@@ -1,13 +1,13 @@
 :root {
   scroll-behavior: smooth;
   --smallSize: max(1.2vw, 1.2vh);
-  --regularSize: max(2vw, 2vh);
+  --regularSize: max(1.8vw, 2vh);
   --bigSize : max(3.5vw, 3.5vh);
 }
-@font-face {font-family: coolFont;src: url('./media/tikalsansmedium.otf');}
+@font-face {font-family: coolFont;src: url('./tikalsansmedium.otf');}
 @font-face {
   font-family: coolFont-italic;
-  src: url('./media/tikalsansmedium-italic.otf');
+  src: url('./tikalsansmedium-italic.otf');
   font-style: italic;
 }
 
@@ -40,7 +40,7 @@ body {
 /*************************the header styles***************/
 header {
   padding: 2%;
-  max-height: 150px;
+  max-height: 180px;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
@@ -52,7 +52,7 @@ header > h1 {
   font-size: var(--bigSize);
   font-weight: bold;
 }
-header  [alt="logo"] {width: max(10vw, 100px); }
+header  [alt="logo"] {width: max(10vw, 100px);}
 header > p {width: 20%;}
 header > .user {
   width: 30%; 

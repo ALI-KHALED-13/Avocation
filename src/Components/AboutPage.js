@@ -1,5 +1,5 @@
-import personalPic from '../media/circle-cropped.png';
-import gitHubLogo from "../media/github.png";
+import personalPic from './media/circle-cropped.png';
+import gitHubLogo from "./media/github.png";
 import { Link } from 'react-router-dom';
 
 const AboutPage =()=>{

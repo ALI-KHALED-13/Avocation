@@ -1,6 +1,6 @@
-import mavatar from '../../media/avatar-m.png';
-import favatar from '../../media/avatar-f.png';
-import loading from '../../media/loading.gif';
+import mavatar from '../media/avatar-m.png';
+import favatar from '../media/avatar-f.png';
+import loading from '../media/loading.gif';
 import imageCompression from 'browser-image-compression';
 
 import React, { useEffect, useRef, useState } from 'react';
