@@ -43,6 +43,8 @@ const SignUpPage =({users, setUsers})=>{
 
     const handleNewUser =(ev)=>{
         ev.preventDefault();
+        if (ev.key === 'Enter') return; //prevent submitting on enter
+        
         if (emailExists || unameTaken){
             return alert('plaease correct your data to remove warnings');
         }

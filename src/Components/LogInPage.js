@@ -80,7 +80,7 @@ const LogInPage =({users, setUser})=>{
 
                 <label style={{fontSize: '17px'}}>
                     <input style={{width: 'auto'}} type="checkbox" checked={toBeRememebered} onChange={()=> setToBeRememebered(!toBeRememebered)}/>
-                    Remmeber Me
+                    Remember Me
                 </label>
                 <br />
                 <br />

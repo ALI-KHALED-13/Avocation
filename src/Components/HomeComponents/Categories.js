@@ -28,7 +28,7 @@ const Categories =({setChosenCategs, user})=>{
     return (
         <aside onClick={markSelected}>
 
-            {user && <button style={{border: "solid rgb(124, 69, 32) 2px"}}>mine</button>}
+            {user && <button style={{border: "solid rgb(124, 69, 32) 2px"}}>Mine</button>}
 
             {categories.map(categ=> <button key={categ.tag}>{categ.tag}</button>)}
             
