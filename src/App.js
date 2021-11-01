@@ -39,7 +39,7 @@ const App =()=>{
   })  
 
   return (
-    <Router>
+    <Router basename="/Avocation">
       <React.Fragment>
         <AvocadoHeader user={user} setUser={setUser}/> 
         <Switch>
