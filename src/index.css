@@ -1,7 +1,7 @@
 :root {
   scroll-behavior: smooth;
   --smallSize: max(1.2vw, 1.2vh);
-  --regularSize: max(1.8vw, 2vh);
+  --regularSize: max(1.8vw, 2.3vh);
   --bigSize : max(3.5vw, 3.5vh);
 }
 @font-face {font-family: coolFont;src: url('./tikalsansmedium.otf');}
