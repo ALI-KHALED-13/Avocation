@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/Avocation/static/css/main.dd42a2c2.chunk.css",
-    "main.js": "/Avocation/static/js/main.19f8e5dc.chunk.js",
-    "main.js.map": "/Avocation/static/js/main.19f8e5dc.chunk.js.map",
-    "runtime-main.js": "/Avocation/static/js/runtime-main.6a25958f.js",
-    "runtime-main.js.map": "/Avocation/static/js/runtime-main.6a25958f.js.map",
+    "main.js": "/Avocation/static/js/main.7be1d77a.chunk.js",
+    "main.js.map": "/Avocation/static/js/main.7be1d77a.chunk.js.map",
+    "runtime-main.js": "/Avocation/static/js/runtime-main.0defb958.js",
+    "runtime-main.js.map": "/Avocation/static/js/runtime-main.0defb958.js.map",
     "static/js/2.91d6fe85.chunk.js": "/Avocation/static/js/2.91d6fe85.chunk.js",
     "static/js/2.91d6fe85.chunk.js.map": "/Avocation/static/js/2.91d6fe85.chunk.js.map",
     "static/css/3.233eda1c.chunk.css": "/Avocation/static/css/3.233eda1c.chunk.css",
-    "static/js/3.24419113.chunk.js": "/Avocation/static/js/3.24419113.chunk.js",
-    "static/js/3.24419113.chunk.js.map": "/Avocation/static/js/3.24419113.chunk.js.map",
+    "static/js/3.cba40ee6.chunk.js": "/Avocation/static/js/3.cba40ee6.chunk.js",
+    "static/js/3.cba40ee6.chunk.js.map": "/Avocation/static/js/3.cba40ee6.chunk.js.map",
     "static/css/4.233eda1c.chunk.css": "/Avocation/static/css/4.233eda1c.chunk.css",
     "static/js/4.57b21b84.chunk.js": "/Avocation/static/js/4.57b21b84.chunk.js",
     "static/js/4.57b21b84.chunk.js.map": "/Avocation/static/js/4.57b21b84.chunk.js.map",
@@ -17,8 +17,8 @@
     "static/js/5.f431f5f3.chunk.js.map": "/Avocation/static/js/5.f431f5f3.chunk.js.map",
     "static/js/6.57a489f3.chunk.js": "/Avocation/static/js/6.57a489f3.chunk.js",
     "static/js/6.57a489f3.chunk.js.map": "/Avocation/static/js/6.57a489f3.chunk.js.map",
-    "static/js/7.27a96a9f.chunk.js": "/Avocation/static/js/7.27a96a9f.chunk.js",
-    "static/js/7.27a96a9f.chunk.js.map": "/Avocation/static/js/7.27a96a9f.chunk.js.map",
+    "static/js/7.bc03f977.chunk.js": "/Avocation/static/js/7.bc03f977.chunk.js",
+    "static/js/7.bc03f977.chunk.js.map": "/Avocation/static/js/7.bc03f977.chunk.js.map",
     "static/js/8.8010f2cc.chunk.js": "/Avocation/static/js/8.8010f2cc.chunk.js",
     "static/js/8.8010f2cc.chunk.js.map": "/Avocation/static/js/8.8010f2cc.chunk.js.map",
     "index.html": "/Avocation/index.html",
@@ -36,9 +36,9 @@
     "static/media/أمي.b50a9144.jpg": "/Avocation/static/media/أمي.b50a9144.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.6a25958f.js",
+    "static/js/runtime-main.0defb958.js",
     "static/js/2.91d6fe85.chunk.js",
     "static/css/main.dd42a2c2.chunk.css",
-    "static/js/main.19f8e5dc.chunk.js"
+    "static/js/main.7be1d77a.chunk.js"
   ]
 }
