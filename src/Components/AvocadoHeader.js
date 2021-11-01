@@ -20,25 +20,23 @@ const AvocadoHeader =({user, setUser})=>{
             setShowOptions(false);
             setUser(false);
         })
-        .catch(console.log);
-
-        
+        .catch(console.log);      
     }
 
-    
 
     const deleteAccount =(ev)=>{
         setShowOptions(false);
 
-        let password = prompt('Sorry to see you leave T-T \n Enter your password to confirm', '');
+        let passwordCheck = prompt('Sorry to see you leave T-T \n Enter your password to confirm', '');
 
-        if (password !== user.password) return  alert('password is not correct');
+        if (passwordCheck !== user.password) return  alert('password is not correct');
             
         fetch('/user', {
             method: "DELETE",
             headers: {"Content-type": "application/json"},
             body: JSON.stringify(user),
-        }).then(resp=> resp.json())
+        })
+        .then(resp=> resp.json())
         .then(message=> {
             if (message.deleted){
                 localStorage.removeItem('user');
@@ -52,28 +50,30 @@ const AvocadoHeader =({user, setUser})=>{
     }
     return (
         <header>
+
             <Link to="/" ><img alt="logo" src={logo}/></Link>
             <h1>Avocation|</h1>
             <p>your bright side hobbies</p>
+
             <div className='user'>
                 {
-                !user? 
-                <Link to="/log-in" >Log In</Link>:
-                <div className="userAvatar">
-                    <img 
-                        alt="avatar" 
-                        src={user.gender === 'male'? mavatar:favatar}
-                        onClick={()=>setShowOptions(!showOptions)}
-                    />
-                    
-                    <div className={(showOptions? 'show ':'') + 'userOptions'}>
-                        <h3>@{user.userName}</h3>
-                        <Link to="/" onClick={logOut}>Log Out</Link>
-                        <p onClick={deleteAccount} style={{color: 'red', marginTop: '10px', cursor:"pointer"}}>
-                            Delete Account
-                        </p>
+                    !user? 
+                    <Link to="/log-in" >Log In</Link>:
+                    <div className="userAvatar">
+                        <img 
+                            alt="avatar" 
+                            src={user.gender === 'male'? mavatar:favatar}
+                            onClick={()=>setShowOptions(!showOptions)}
+                        />
+                        
+                        <div className={(showOptions? 'show ':'') + 'userOptions'}>
+                            <h3>@{user.userName}</h3>
+                            <Link to="/" onClick={logOut}>Log Out</Link>
+                            <p onClick={deleteAccount} style={{color: 'red', marginTop: '10px', cursor:"pointer"}}>
+                                Delete Account
+                            </p>
+                        </div>
                     </div>
-                </div>
                 }
             </div>
             

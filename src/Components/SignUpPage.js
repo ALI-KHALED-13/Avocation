@@ -10,9 +10,10 @@ const SignUpPage =({users, setUsers})=>{
     const [password, setPassword] = useState('');
     const [passVisibile, setPassVisible] = useState(false);
     const [gender, setGender] = useState('');
-    const [passwordMatches, setPasswordMatches] = useState(true);
     const [savedHobbies, setSavedHobbies] = useState(["LETTERATURE", "SINGING", "DRAWING"]);
     const [addedTags, setAddedTags] = useState([]);
+
+    const [passwordMatches, setPasswordMatches] = useState(true);
     const [unameTaken, setUnameTaken] = useState(false);
     const [emailExists, setEmailExists] = useState(false);
     const history = useHistory();
@@ -54,7 +55,9 @@ const SignUpPage =({users, setUsers})=>{
             if (serverMessage.message === 'done'){
                 setUsers([...users, serverMessage.result]);
                 history.push('/log-in');
-            } else {console.log(serverMessage.message)}
+            } else {
+                console.log(serverMessage.message);
+            }
         })
         .catch(console.Error)
     }
@@ -73,8 +76,12 @@ const SignUpPage =({users, setUsers})=>{
 
                     <tr>
                         <td> <label htmlFor="userName">User Name:</label> </td>
-                        <td> <input id='userName' name="userName" placeholder="letters and numbers (no space)" 
-                                    pattern="^(?=.*[a-z])(?=.*[0-9])\w*$" required onBlur={checkExistance}/></td>
+                        <td>
+                            <input 
+                                    id='userName' name="userName" placeholder="letters and numbers (no space)" 
+                                    pattern="^(?=.*[a-z])(?=.*[0-9])\w*$" required onBlur={checkExistance}
+                            />
+                        </td>
                         <td> {unameTaken? <span className="warning">already taken, try another</span> :'used to log in'}</td>
                     </tr>
 
@@ -83,8 +90,9 @@ const SignUpPage =({users, setUsers})=>{
                             <label htmlFor="password">Password:</label> 
                         </td>
                         <td>
-                            <input type={passVisibile? 'text':'password'} name="password" placeholder="at least 5 characters" 
-                                   pattern="\w{5,}" id='password' required value={password} onChange={(ev)=> setPassword(ev.target.value)}
+                            <input 
+                                type={passVisibile? 'text':'password'} name="password" placeholder="at least 5 characters" 
+                                pattern="\w{5,}" id='password' required value={password} onChange={(ev)=> setPassword(ev.target.value)}
                             />
                         </td>
                         <td>
@@ -99,8 +107,9 @@ const SignUpPage =({users, setUsers})=>{
                             <label htmlFor="passwordAgain">Confirm Password:</label> 
                         </td>
                         <td>
-                            <input type='password' placeholder="at least 5 characters" pattern="^\w{5,}" 
-                                  id='passwordAgain' onBlur={checkMatching} required
+                            <input
+                                type='password' placeholder="at least 5 characters" pattern="^\w{5,}" 
+                                id='passwordAgain' onBlur={checkMatching} required
                             />
                         </td>
                         <td>
@@ -110,9 +119,9 @@ const SignUpPage =({users, setUsers})=>{
 
                     <tr>
                         <td> <label htmlFor="Email">Email:</label> </td>
-                        <td><input type="email" id='Email' name="email" required
-                                   pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" 
-                                   onBlur={checkExistance} 
+                        <td><input 
+                                type="email" name="email" required onBlur={checkExistance}
+                                pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" id='Email'        
                             />
                         </td>
                         <td> {emailExists? <span className="warning">already exists, try <Link to="/log-in">logging in</Link></span> :'used to log in'}</td>

@@ -6,9 +6,10 @@ import mother from '../media/أمي.jpg';
 
 const Avocata =({data, user, users ,avocatas, updataAvocatas})=>{
 
+    const [deleting, setDeleting] = useState(false);
     const author = users.find(user=> user.userName === data.creator);
     const mediaType = data.contentType;
-    const [deleting, setDeleting] = useState(false);
+    
     let fileURL;
 
     // delete the media url when the component unmounts (performance thing)
@@ -27,9 +28,9 @@ const Avocata =({data, user, users ,avocatas, updataAvocatas})=>{
             return <img alt={data.fileName} src={fileURL} className="media"/>
         }else {
             return (
-                <audio controls className="media">
-                    <source src={fileURL} type="audio/mpeg"></source>
-                </audio>
+                    <audio controls className="media">
+                        <source src={fileURL} type="audio/mpeg"></source>
+                    </audio>
                 )
         }
     }

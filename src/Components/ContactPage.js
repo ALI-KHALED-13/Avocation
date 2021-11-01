@@ -14,7 +14,8 @@ const ContactPage =()=>{
                 rel="noreferrer"
                 > LinkedIn </a>
                 <br/>
-                or by sending me <a 
+                or by sending me 
+                <a 
                 href="mailto:aliknake@gmail.com"
                 rel="noreferrer"
                 >an email

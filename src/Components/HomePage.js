@@ -8,8 +8,10 @@ const HomePage =({user})=>{
     const [chosenCategs, setChosenCategs] = useState(['']);
     return (
         <main id='home'>
-            <Categories setChosenCategs={setChosenCategs} user={user}/> 
+            <Categories setChosenCategs={setChosenCategs} user={user}/>
+
             <AvocatasArea user={user} chosenCategs={chosenCategs}/>
+            
             <ContactFooter />
         </main>
     );

@@ -29,9 +29,7 @@ class AvocatasArea extends React.Component {
             })
             .then(resp=> resp.json())
             .then(avocatas=> {
-                if (avocatas[0]._id === this.state.avocatas[0]?._id){// no new stuff
-                    return;
-                }
+                if (avocatas[0]._id === this.state.avocatas[0]?._id) return // no new stuff
                 this.updataAvocatas(avocatas);   
             })
             .catch(err=>{

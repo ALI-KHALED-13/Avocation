@@ -42,14 +42,18 @@ const LogInPage =({users, setUser})=>{
     return (
         <main className="signing">
             <form onSubmit={handleLogging}>
-                {userFound || <span className="warning">User name/email or password is not correct or doesn't exist</span>}
+
+                { userFound || <span className="warning">User name/email or password is not correct or doesn't exist</span> }
+
                 <table>
                     <tbody>
+
                     <tr>
                         <td> <label htmlFor="identifier">User Name:</label> </td>
-                        <td> <input id='identifier' name="identifier"  placeholder="username or email"
-                                    required value={identifier} onChange={(ev)=> setIdentifier(ev.target.value)}
-                            />
+                        <td> <input 
+                                id='identifier' name="identifier"  placeholder="username or email"
+                                required value={identifier} onChange={(ev)=> setIdentifier(ev.target.value)}
+                              />
                         </td>
                         <td> </td>
                     </tr>
@@ -59,8 +63,9 @@ const LogInPage =({users, setUser})=>{
                             <label htmlFor="password">Password:</label> 
                         </td>
                         <td>
-                            <input type={passVisibile? 'text':'password'} name="password" pattern=".{5,}" 
-                                   id='password' required value={password} onChange={(ev)=> setPassword(ev.target.value)}
+                            <input 
+                                type={passVisibile? 'text':'password'} name="password" pattern=".{5,}" 
+                                id='password' required value={password} onChange={(ev)=> setPassword(ev.target.value)}
                             />
                         </td>
                         <td>
@@ -69,11 +74,13 @@ const LogInPage =({users, setUser})=>{
                             </button>
                         </td>
                     </tr>
+
                     </tbody>
                 </table>
 
                 <label style={{fontSize: '17px'}}>
-                    <input style={{width: 'auto'}} type="checkbox" checked={toBeRememebered} onChange={()=> setToBeRememebered(!toBeRememebered)}/> Remmeber Me
+                    <input style={{width: 'auto'}} type="checkbox" checked={toBeRememebered} onChange={()=> setToBeRememebered(!toBeRememebered)}/>
+                    Remmeber Me
                 </label>
                 <br />
                 <br />

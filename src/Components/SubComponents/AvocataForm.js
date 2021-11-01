@@ -1,18 +1,20 @@
 import mavatar from '../media/avatar-m.png';
 import favatar from '../media/avatar-f.png';
 import loading from '../media/loading.gif';
-import imageCompression from 'browser-image-compression';
 
+import imageCompression from 'browser-image-compression';
 import React, { useEffect, useRef, useState } from 'react';
+
 const TagInput = React.lazy(()=> import('../SubComponents/TagInput'));
+
 
 const AvocataForm =({user, avocatas, updataAvocatas})=>{
     const [savedTags, setSavedTags] = useState([]);
     const [addedTags, setAddedTags] = useState([]);
-    const [uploaded, setUploaded] = useState(false);
     const fileInput = useRef(null);
     const [fileName, setFileName] = useState('');
     const [isPosting, setIsPosting] = useState(false);
+    const [uploaded, setUploaded] = useState(false);
 
 
     const saveTag =(tagTxt)=>{
@@ -20,12 +22,14 @@ const AvocataForm =({user, avocatas, updataAvocatas})=>{
     }
     
     useEffect(()=>{
-        fetch('/tags')
+        const controller = new AbortController();
+        fetch('/tags', {signal: controller.signal})
         .then(resp=> resp.json())
         .then(tagsArr=>{
             setSavedTags(tagsArr.map(tagDoc=> tagDoc.tag));
         })
         .catch(console.log);
+        return ()=> controller.abort()
     }, [])
 
     useEffect(()=>{
@@ -34,11 +38,14 @@ const AvocataForm =({user, avocatas, updataAvocatas})=>{
             let file = ev.target.files[0];
             if (!file) return setUploaded(false);
             if (!file.type.startsWith('image/') && file.type !== "audio/mpeg"){
+
                 alert('please upload an image or mp3 file only')
                 ev.target.value = null;
                 setUploaded(false);
                 setFileName('');
+
             } else if (file.size/1048576 > 8) {
+
                 alert('file size it too big, files below 8MB only');
                 ev.target.value = null;
                 setUploaded(false);
@@ -51,7 +58,7 @@ const AvocataForm =({user, avocatas, updataAvocatas})=>{
         
     }, [])
 
-    const submitAvocata =async (ev)=>{
+    const submitAvocata = async (ev)=>{
         ev.preventDefault();
         setIsPosting(true);
         const form = new FormData(ev.target);
@@ -92,10 +99,11 @@ const AvocataForm =({user, avocatas, updataAvocatas})=>{
 
     return (
         <form onSubmit={submitAvocata}>
+
             <div className="header">
                 <img alt="avatar" src={user.gender === 'male'? mavatar: favatar}/>
                 <p>{user.name}</p>
-                {isPosting && <img alt="loading.." src={loading} />}
+                { isPosting && <img alt="loading.." src={loading} />}
             </div>
 
             <textarea placeholder="content/caption" required name="text"/>
@@ -109,13 +117,13 @@ const AvocataForm =({user, avocatas, updataAvocatas})=>{
                 />
             </React.Suspense>
 
-            {uploaded && 
-                <span className="fileData">{fileName}</span>
-            }
+            { uploaded && <span className="fileData">{fileName}</span> }
+
             <label id="upload"> Upload image/mp3
                 <input type="file" accept="image/*,audio/mpeg" ref={fileInput} name="media"/>
             </label>
             <button>Publish</button>
+
         </form>
     );
 }

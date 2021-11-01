@@ -20,7 +20,7 @@ const App =()=>{
   const [user, setUser] = useState(stillSaved? prevUser: false ); //indicating a guest if false
   const [users, setUsers] = useState([]);
 
-  useEffect(()=> {
+  useEffect(()=> { //checking if the server is running
     fetch('/express_backend').then(resp=> resp.json())
     .then(data=> console.log(data.express)).catch(console.log);
   }, [])
@@ -69,56 +69,3 @@ const App =()=>{
 
 export default App;
 
-/* 
-
-*/
-/*
-const [data, setData] = useState('');
-
-  useEffect(()=>{
-    callServer()
-    .then(result=> setData(result.express))
-    .catch(console.error);
-  }, [])
-
-  const callServer = async()=>{
-    const response = await fetch('/express_backend');
-    const body = await response.json();
-
-    if (response.status !== 200) {
-      throw Error(body.message) 
-    }
-    return body;
-  }
-*/
-/*
-class App extends Component {
-state = {
-    data: null
-  };
-
-  componentDidMount() {
-    this.callBackendAPI()
-      .then(res => this.setState({ data: res.express }))
-      .catch(err => console.log(err));
-  }
-    // fetching the GET route from the Express server which matches the GET route from server.js
-  callBackendAPI = async () => {
-    const response = await fetch('/express_backend');
-    const body = await response.json();
-
-    if (response.status !== 200) {
-      throw Error(body.message) 
-    }
-    return body;
-  };
-
-  render() {
-    return (
-      <div className="App">
-        
-        <p className="App-intro">{this.state.data}</p>
-      </div>
-    );
-  }
-}*/
