@@ -16,7 +16,7 @@ const LogInPage =({users, setUser})=>{
         if (!userMatched || userMatched.password !== password) return setUserFound(false);
         
         
-        fetch('/Avocation/user', {
+        fetch('https://avocation.herokuapp.com/user', {
             method: 'PUT',
             headers: {"Content-Type": 'application/json'},
             body: JSON.stringify(userMatched),

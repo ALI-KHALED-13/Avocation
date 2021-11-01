@@ -16,12 +16,12 @@ class AvocatasArea extends React.Component {
     }
 
     componentDidMount(){
-        fetch('/Avocation/users', {signal: this.controller.signal})
+        fetch('https://avocation.herokuapp.com/users', {signal: this.controller.signal})
         .then(resp=> resp.json())
         .then(fetchedUsers=> {
             this.setState({users: fetchedUsers});
 
-            fetch('/Avocation/all-avocatas', {
+            fetch('https://avocation.herokuapp.com/all-avocatas', {
                 method: "PUT",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({createdBefore: Date.now()}),
@@ -57,7 +57,7 @@ class AvocatasArea extends React.Component {
         observer.observe(lastAvoca);
 
         /////////////////////update users status ////////
-        fetch('/Avocation/users', {signal: this.controller.signal})
+        fetch('https://avocation.herokuapp.com/users', {signal: this.controller.signal})
         .then(resp=> resp.json())
         .then(fetchedUsers=>{
 
@@ -87,7 +87,7 @@ class AvocatasArea extends React.Component {
         if (entries[0].isIntersecting){
             feedSection.lastElementChild.style.visibility = "visible"; //loading text
 
-            fetch('/Avocation/all-avocatas', {
+            fetch('https://avocation.herokuapp.com/all-avocatas', {
                 method: "PUT",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({

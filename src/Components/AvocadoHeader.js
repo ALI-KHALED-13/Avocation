@@ -8,7 +8,7 @@ const AvocadoHeader =({user, setUser})=>{
     const [showOptions, setShowOptions] = useState(false);
     
     const logOut =()=>{
-        fetch('/Avocation/user', {
+        fetch('https://avocation.herokuapp.com/user', {
             method: "PUT",
             headers: {"Content-Type": 'application/json'},
             body: JSON.stringify(user),
@@ -31,7 +31,7 @@ const AvocadoHeader =({user, setUser})=>{
 
         if (passwordCheck !== user.password) return  alert('password is not correct');
             
-        fetch('/Avocation/user', {
+        fetch('https://avocation.herokuapp.com/user', {
             method: "DELETE",
             headers: {"Content-type": "application/json"},
             body: JSON.stringify(user),

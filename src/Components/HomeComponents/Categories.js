@@ -5,7 +5,7 @@ const Categories =({setChosenCategs, user})=>{
 
     useEffect(()=>{
         const controller = new AbortController();
-        fetch('/Avocation/tags', {signal: controller.signal})
+        fetch('https://avocation.herokuapp.com/tags', {signal: controller.signal})
         .then(resp=> resp.json())
         .then(tagsArr=>{
             const availCateg = tagsArr.filter(tagOb=> tagOb.count > 0).sort((ob1, ob2)=> ob2.count - ob1.count );

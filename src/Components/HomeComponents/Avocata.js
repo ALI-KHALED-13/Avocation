@@ -39,7 +39,7 @@ const Avocata =({data, user, users ,avocatas, updataAvocatas})=>{
     const deleteAvoca =(ev)=>{
         setDeleting(true);
 
-        fetch('/Avocation/avocata', {
+        fetch('https://avocation.herokuapp.com/avocata', {
             method:"delete",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({id: data._id}),

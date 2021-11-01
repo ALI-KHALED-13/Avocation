@@ -23,7 +23,7 @@ const AvocataForm =({user, avocatas, updataAvocatas})=>{
     
     useEffect(()=>{
         const controller = new AbortController();
-        fetch('/Avocation/tags', {signal: controller.signal})
+        fetch('https://avocation.herokuapp.com/tags', {signal: controller.signal})
         .then(resp=> resp.json())
         .then(tagsArr=>{
             setSavedTags(tagsArr.map(tagDoc=> tagDoc.tag));
@@ -76,7 +76,7 @@ const AvocataForm =({user, avocatas, updataAvocatas})=>{
         form.append('fileName', fileName);
         form.append('contentType', fileInput.current.files[0]?.type); //note optional chaining
 
-        fetch('/Avocation/avocata', {
+        fetch('https://avocation.herokuapp.com/avocata', {
             method: "POST",
             body: form,
         })

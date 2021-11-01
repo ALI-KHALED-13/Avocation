@@ -21,13 +21,13 @@ const App =()=>{
   const [users, setUsers] = useState([]);
 
   useEffect(()=> { //checking if the server is running
-    fetch('Avocation/express_backend').then(resp=> resp.json())
+    fetch('https://avocation.herokuapp.com/express_backend').then(resp=> resp.json())
     .then(data=> console.log(data.express)).catch(console.log);
   }, [])
   
   useEffect(()=>{
     
-    fetch('/Avocation/users')
+    fetch('https://avocation.herokuapp.com/users')
     .then(resp=> resp.json())
     .then(fetchedUsers=> {
 
