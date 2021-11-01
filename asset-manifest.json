@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/Avocation/static/css/main.ebf64246.chunk.css",
+    "main.css": "/Avocation/static/css/main.dd42a2c2.chunk.css",
     "main.js": "/Avocation/static/js/main.19f8e5dc.chunk.js",
     "main.js.map": "/Avocation/static/js/main.19f8e5dc.chunk.js.map",
     "runtime-main.js": "/Avocation/static/js/runtime-main.6a25958f.js",
@@ -24,7 +24,7 @@
     "index.html": "/Avocation/index.html",
     "static/css/3.233eda1c.chunk.css.map": "/Avocation/static/css/3.233eda1c.chunk.css.map",
     "static/css/4.233eda1c.chunk.css.map": "/Avocation/static/css/4.233eda1c.chunk.css.map",
-    "static/css/main.ebf64246.chunk.css.map": "/Avocation/static/css/main.ebf64246.chunk.css.map",
+    "static/css/main.dd42a2c2.chunk.css.map": "/Avocation/static/css/main.dd42a2c2.chunk.css.map",
     "static/js/2.91d6fe85.chunk.js.LICENSE.txt": "/Avocation/static/js/2.91d6fe85.chunk.js.LICENSE.txt",
     "static/media/avatar-f.png": "/Avocation/static/media/avatar-f.b8f900aa.png",
     "static/media/avatar-m.png": "/Avocation/static/media/avatar-m.5eef229f.png",
@@ -38,7 +38,7 @@
   "entrypoints": [
     "static/js/runtime-main.6a25958f.js",
     "static/js/2.91d6fe85.chunk.js",
-    "static/css/main.ebf64246.chunk.css",
+    "static/css/main.dd42a2c2.chunk.css",
     "static/js/main.19f8e5dc.chunk.js"
   ]
 }
