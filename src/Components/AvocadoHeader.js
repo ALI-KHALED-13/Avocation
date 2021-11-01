@@ -8,7 +8,7 @@ const AvocadoHeader =({user, setUser})=>{
     const [showOptions, setShowOptions] = useState(false);
     
     const logOut =()=>{
-        fetch('/user', {
+        fetch('/Avocation/user', {
             method: "PUT",
             headers: {"Content-Type": 'application/json'},
             body: JSON.stringify(user),
@@ -31,7 +31,7 @@ const AvocadoHeader =({user, setUser})=>{
 
         if (passwordCheck !== user.password) return  alert('password is not correct');
             
-        fetch('/user', {
+        fetch('/Avocation/user', {
             method: "DELETE",
             headers: {"Content-type": "application/json"},
             body: JSON.stringify(user),

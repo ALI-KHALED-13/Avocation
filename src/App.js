@@ -21,13 +21,13 @@ const App =()=>{
   const [users, setUsers] = useState([]);
 
   useEffect(()=> { //checking if the server is running
-    fetch('/express_backend').then(resp=> resp.json())
+    fetch('Avocation/express_backend').then(resp=> resp.json())
     .then(data=> console.log(data.express)).catch(console.log);
   }, [])
   
   useEffect(()=>{
     
-    fetch('/users')
+    fetch('/Avocation/users')
     .then(resp=> resp.json())
     .then(fetchedUsers=> {
 

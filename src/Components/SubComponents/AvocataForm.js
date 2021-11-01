@@ -23,7 +23,7 @@ const AvocataForm =({user, avocatas, updataAvocatas})=>{
     
     useEffect(()=>{
         const controller = new AbortController();
-        fetch('/tags', {signal: controller.signal})
+        fetch('/Avocation/tags', {signal: controller.signal})
         .then(resp=> resp.json())
         .then(tagsArr=>{
             setSavedTags(tagsArr.map(tagDoc=> tagDoc.tag));
@@ -76,7 +76,7 @@ const AvocataForm =({user, avocatas, updataAvocatas})=>{
         form.append('fileName', fileName);
         form.append('contentType', fileInput.current.files[0]?.type); //note optional chaining
 
-        fetch('/avocata', {
+        fetch('/Avocation/avocata', {
             method: "POST",
             body: form,
         })

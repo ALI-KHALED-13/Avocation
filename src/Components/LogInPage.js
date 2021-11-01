@@ -16,7 +16,7 @@ const LogInPage =({users, setUser})=>{
         if (!userMatched || userMatched.password !== password) return setUserFound(false);
         
         
-        fetch('/user', {
+        fetch('/Avocation/user', {
             method: 'PUT',
             headers: {"Content-Type": 'application/json'},
             body: JSON.stringify(userMatched),

@@ -49,7 +49,7 @@ const SignUpPage =({users, setUsers})=>{
         const form = new FormData(ev.target);
         form.append('hobbies', addedTags.join(' '));
 
-        fetch('/user', {method: "post",body: form,})
+        fetch('/Avocation/user', {method: "post",body: form,})
         .then((response)=> response.json())
         .then((serverMessage)=> {
             if (serverMessage.message === 'done'){
