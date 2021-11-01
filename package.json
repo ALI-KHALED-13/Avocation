@@ -2,6 +2,7 @@
   "name": "avocation",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://ALI-KHALED-13.github.io/Avocation",
   "proxy": "https://avocation.herokuapp.com/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
