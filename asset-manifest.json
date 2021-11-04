@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/Avocation/static/css/main.dd42a2c2.chunk.css",
-    "main.js": "/Avocation/static/js/main.13460a39.chunk.js",
-    "main.js.map": "/Avocation/static/js/main.13460a39.chunk.js.map",
+    "main.js": "/Avocation/static/js/main.eeb157e4.chunk.js",
+    "main.js.map": "/Avocation/static/js/main.eeb157e4.chunk.js.map",
     "runtime-main.js": "/Avocation/static/js/runtime-main.b406d550.js",
     "runtime-main.js.map": "/Avocation/static/js/runtime-main.b406d550.js.map",
     "static/js/2.4b4436bf.chunk.js": "/Avocation/static/js/2.4b4436bf.chunk.js",
@@ -39,6 +39,6 @@
     "static/js/runtime-main.b406d550.js",
     "static/js/2.4b4436bf.chunk.js",
     "static/css/main.dd42a2c2.chunk.css",
-    "static/js/main.13460a39.chunk.js"
+    "static/js/main.eeb157e4.chunk.js"
   ]
 }
