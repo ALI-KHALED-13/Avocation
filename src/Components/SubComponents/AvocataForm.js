@@ -60,8 +60,7 @@ const AvocataForm =({user, avocatas, updataAvocatas})=>{
 
     const submitAvocata = async (ev)=>{
         ev.preventDefault();
-        if (ev.key === 'Enter') return; //prevent submitting on enter
-        
+
         setIsPosting(true);
         const form = new FormData(ev.target);
 

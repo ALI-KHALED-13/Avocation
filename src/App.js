@@ -1,5 +1,5 @@
 import React, {useState, useEffect, Suspense, lazy} from 'react';
-import {BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {HashRouter as Router, Route, Switch } from 'react-router-dom';
 import './index.css';
 import AvocadoHeader from './Components/AvocadoHeader';
 import HomePage from './Components/HomePage';
